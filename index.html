@@ -1,0 +1,1649 @@
+<!doctype html>
+<html lang="en" class="intro-on">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="dark" />
+<meta name="description" content="Sahel Development Group — improving infrastructure across the Sahel in architecture, technology, and finance. Its products are Sabaq, an AI Quran memorization coach, and BaccPrep, bac exam preparation for Mali. 2027 goals tracked in public: Sabaq and BaccPrep to 300 users each, and $3,000 of giving through the Mali Wellness Foundation. All counters start at zero." />
+<link rel="icon" href="data:," />
+<title>Sahel Development Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Alkalami&family=Amiri:wght@400;700&family=Archivo:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Harmattan:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#060606;
+    --panel:#0d0d0d;
+    --panel-2:#121212;
+    --line:#262626;
+    --text:#f4f4f4;
+    --body:#c9c9c9;
+    --muted:#9a9a9a;
+    --faint:#6e6e6e;
+    --white:#ffffff;
+    --black:#060606;
+    --forest:#0a3524;
+    --forest-2:#0d4a30;
+    --forest-deep:#04190f;
+    --emerald:#1e9e72;
+    --lime:#6cb814;
+    --lime-hi:#84cc26;
+    --lime-ink:#0a1c10;
+    --mali-green:#14713f;
+    --mali-green-hi:#1e8a4c;
+    --mali-gold:#c07f04;
+    --mali-gold-hi:#d99a06;
+    --mali-gold-ink:#241a02;
+    --mali-red:#9c1f16;
+    --mali-red-hi:#cc382a;
+    /* Sudani manuscript ink — warm brown of the Timbuktu hand, lifted only enough to read on near-black */
+    --ink:#cd8f4d;
+    --font-ar:"Alkalami","Harmattan","Amiri",serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:"Archivo",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    font-size:16px;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit}
+  button{font:inherit; color:inherit}
+  [hidden]{display:none !important}
+  ::selection{background:var(--mali-gold); color:var(--mali-gold-ink)}
+  :focus-visible{outline:2px solid var(--white); outline-offset:3px}
+
+  .wrap{max-width:1180px; margin:0 auto; padding:0 20px}
+
+  /* ---------- Pages (hash-routed views) ---------- */
+  .page-enter{animation:pageIn .55s cubic-bezier(.22,.61,.21,1) both}
+  @keyframes pageIn{from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:none}}
+
+  /* ---------- Scroll reveal ---------- */
+  .rv{opacity:0; transform:translateY(26px); transition:opacity .8s cubic-bezier(.22,.61,.21,1), transform .8s cubic-bezier(.22,.61,.21,1)}
+  .rv.d1{transition-delay:.08s}
+  .rv.d2{transition-delay:.16s}
+  .rv.d3{transition-delay:.24s}
+  .rv.in{opacity:1; transform:none}
+
+  /* ---------- Buttons & chips (one system, everywhere) ---------- */
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:10px;
+    min-height:52px; padding:14px 26px;
+    border:1px solid var(--white); border-radius:0;
+    font-size:13px; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
+    text-decoration:none; text-align:center; cursor:pointer;
+    transition:background .2s ease, color .2s ease, border-color .2s ease;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .btn-solid{background:var(--mali-gold); color:var(--mali-gold-ink); border-color:var(--mali-gold)}
+  .btn-solid:hover{background:var(--mali-gold-hi); color:var(--mali-gold-ink); border-color:var(--mali-gold-hi)}
+  .btn-ghost{background:transparent; color:var(--white)}
+  .btn-ghost:hover{background:var(--white); color:var(--black)}
+  .btn:active{transform:translateY(1px)}
+  .btn .btn-arrow{font-size:15px; line-height:1; transition:transform .2s ease}
+  .btn:hover .btn-arrow{transform:translate(2px,-2px)}
+  .chip{
+    display:inline-flex; align-items:center;
+    font-size:11px; font-weight:700; letter-spacing:.16em; text-transform:uppercase;
+    background:var(--lime); color:var(--lime-ink); padding:8px 12px; white-space:nowrap; line-height:1;
+  }
+  .chip-outline{background:transparent; color:var(--white); border:1px solid var(--white)}
+  .chip-gold{background:var(--mali-gold); color:var(--mali-gold-ink)}
+  .chip-red-o{background:transparent; color:var(--mali-red-hi); border:1px solid var(--mali-red)}
+
+  /* Accent words — italic serif; green by default, gold and red where assigned */
+  .hero-mission em, .sec-title em, .page-title em, .goal-title em, .foot-line em{color:var(--emerald)}
+  .sec-title em.em-gold, .page-title em.em-gold, .goal-title em.em-gold{color:var(--mali-gold-hi)}
+  .sec-title em.em-red, .page-title em.em-red, .goal-title em.em-red{color:var(--mali-red-hi)}
+
+  /* Mali tricolor stripe — green, gold, red */
+  .tricolor{height:4px; background:linear-gradient(90deg, var(--mali-green) 0 33.4%, var(--mali-gold) 33.4% 66.7%, var(--mali-red) 66.7% 100%)}
+
+  /* Photography with a dark overlay, so type stays readable */
+  .photo-bg{position:absolute; inset:0; background-size:cover; background-position:center; background-repeat:no-repeat}
+  .photo-bg::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(6,6,6,.86), rgba(6,6,6,.78) 46%, rgba(6,6,6,.95))}
+
+  /* ---------- Bismillah entrance (first entry only) ---------- */
+  html.intro-on{overflow:hidden}
+  html.intro-on .topbar, html.intro-on main *, html.intro-on footer *{animation-play-state:paused}
+  .intro{
+    position:fixed; inset:0; z-index:100;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--bg);
+    cursor:pointer;
+    opacity:0; overflow:hidden;
+    animation:introIn .3s ease .05s both;
+    transition:opacity .3s ease;
+    -webkit-tap-highlight-color:transparent;
+  }
+  @keyframes introIn{to{opacity:1}}
+  .intro.done{opacity:0; pointer-events:none}
+  .intro-inner{text-align:center; padding:0 20px}
+  .intro-ar{
+    margin:0;
+    font-family:var(--font-ar);
+    font-size:clamp(34px, 8.5vw, 64px); line-height:1.9;
+    color:var(--ink);
+  }
+  /* Entrance letters: each starts scattered off its place, then glides in.
+     Colors cycle the diaspora three — deep green, deep gold, deep red. */
+  .intro-ar .lt{
+    display:inline-block;
+    opacity:0;
+    transform:translate(var(--dx,0px), var(--dy,0px)) rotate(var(--rot,0deg));
+    transition:transform var(--dur,.85s) cubic-bezier(.22,.68,.24,1) var(--delay,0s),
+               opacity .45s ease var(--delay,0s);
+    will-change:transform,opacity;
+  }
+  .intro.go .intro-ar .lt{opacity:1; transform:translate(0,0) rotate(0deg)}
+  .intro-ar .lt.c0{color:var(--mali-green-hi)}
+  .intro-ar .lt.c1{color:var(--mali-gold-hi)}
+  .intro-ar .lt.c2{color:var(--mali-red-hi)}
+  .intro-tr{
+    margin:10px 0 0;
+    font-size:11px; font-weight:600; letter-spacing:.3em; text-transform:uppercase;
+    color:var(--muted);
+  }
+
+  /* ---------- Top bar ---------- */
+  .topbar{
+    position:sticky; top:0; z-index:40;
+    background:rgba(6,6,6,.88);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    animation:barIn .7s cubic-bezier(.22,.61,.21,1) both;
+  }
+  @keyframes barIn{from{opacity:0; transform:translateY(-100%)} to{opacity:1; transform:none}}
+  .bismillah{
+    padding:12px 20px 10px;
+    text-align:center;
+    border-bottom:1px solid var(--line);
+  }
+  .bismillah .ar{
+    display:block;
+    font-family:var(--font-ar);
+    font-size:22px; line-height:1.8;
+    color:var(--ink);
+  }
+  .bismillah .tr{
+    display:block; margin-top:1px;
+    font-size:10px; font-weight:600; letter-spacing:.26em; text-transform:uppercase;
+    color:var(--muted);
+  }
+  .topbar-inner{
+    max-width:1180px; margin:0 auto; padding:0 20px;
+    display:flex; align-items:center; justify-content:space-between; gap:8px 16px;
+    min-height:56px;
+  }
+  .wordmark{
+    display:inline-flex; align-items:center; min-height:44px;
+    font-size:13px; font-weight:700; letter-spacing:.22em; text-transform:uppercase;
+    text-decoration:none; white-space:nowrap;
+  }
+  .wordmark span{color:var(--muted); font-weight:500}
+  .wordmark:active{transform:translateY(1px)}
+  .topnav{display:flex; gap:6px}
+  .topnav a{
+    display:inline-flex; align-items:center; min-height:44px; padding:6px 10px;
+    font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--muted); text-decoration:none;
+    border-bottom:2px solid transparent;
+    transition:color .2s ease, border-color .2s ease;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .topnav a:hover{color:var(--white)}
+  .topnav a:active{transform:translateY(1px)}
+  .topnav a[aria-current="page"]{color:var(--white); border-bottom-color:var(--mali-gold)}
+
+  /* ---------- Hero (home) ---------- */
+  .hero{
+    position:relative;
+    border-bottom:1px solid var(--line);
+    padding:clamp(48px, 9vh, 96px) 0 0;
+    overflow:hidden;
+  }
+  .hero .wrap{position:relative; z-index:1}
+  .hero-photo{background-image:url(assets/hero-kids.jpg); background-position:center 38%}
+  .hero-eyebrow{
+    display:flex; justify-content:space-between; gap:12px 24px; flex-wrap:wrap;
+    font-size:12px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--muted);
+    animation:fadeUp .8s .1s cubic-bezier(.22,.61,.21,1) both;
+  }
+  .hero-title{
+    margin:clamp(14px, 3vh, 28px) 0 0;
+    font-size:clamp(46px, 10.4vw, 128px);
+    line-height:1.02; letter-spacing:-.035em; font-weight:700;
+    text-transform:uppercase;
+  }
+  .hero-title .line{display:block; overflow:hidden}
+  .hero-title .line > span{
+    display:block;
+    padding:.08em .1em .14em 0;
+    animation:lineUp 1s cubic-bezier(.19,.7,.22,1) both;
+  }
+  .hero-title .line:nth-child(1) > span{animation-delay:.15s}
+  .hero-title .line:nth-child(2) > span{animation-delay:.28s}
+  .hero-title .line:nth-child(3) > span{animation-delay:.41s}
+  .hero-title .w-green{color:var(--mali-green-hi)}
+  .hero-title .w-red{color:var(--mali-red-hi)}
+  .hero-title .w-gold{color:var(--mali-gold-hi)}
+  .hero-title .line > span{text-shadow:0 3px 34px rgba(0,0,0,.5)}
+  @keyframes lineUp{from{transform:translateY(110%)} to{transform:none}}
+  @keyframes fadeUp{from{opacity:0; transform:translateY(18px)} to{opacity:1; transform:none}}
+  .hero-mission{
+    margin:clamp(26px, 5vh, 44px) 0 0; max-width:860px;
+    font-size:clamp(24px, 4.2vw, 40px); line-height:1.25; font-weight:500; letter-spacing:-.015em;
+    animation:fadeUp .9s .55s cubic-bezier(.22,.61,.21,1) both;
+  }
+  .hero-mission em{font-family:"Cormorant Garamond",Georgia,serif; font-style:italic; font-weight:500; font-size:1.12em}
+  .hero-sub{
+    margin:18px 0 0; max-width:560px; color:var(--muted); font-size:16px; line-height:1.6;
+    animation:fadeUp .9s .68s cubic-bezier(.22,.61,.21,1) both;
+  }
+  .pillars{
+    display:grid; grid-template-columns:repeat(3, 1fr);
+    margin-top:clamp(32px, 6vh, 56px);
+    border-top:1px solid var(--line);
+    animation:fadeUp .9s .8s cubic-bezier(.22,.61,.21,1) both;
+  }
+  .pillar{
+    padding:20px 20px 22px;
+    border-left:1px solid var(--line);
+    transition:background .25s ease;
+  }
+  .pillar:first-child{border-left:0; padding-left:0}
+  .pillar:hover{background:var(--panel)}
+  .pillar .p-num{font-size:12px; font-weight:600; letter-spacing:.16em; color:var(--emerald)}
+  .pillar:nth-child(1) .p-num{color:var(--mali-green-hi)}
+  .pillar:nth-child(2) .p-num{color:var(--mali-gold-hi)}
+  .pillar:nth-child(3) .p-num{color:var(--mali-red-hi)}
+  .pillar .p-name{display:block; margin-top:8px; font-size:clamp(19px, 2.6vw, 26px); font-weight:600; letter-spacing:-.01em}
+  .pillar .p-line{display:block; margin-top:6px; font-size:14px; color:var(--muted); line-height:1.5}
+  .hero-counters{
+    display:grid; grid-template-columns:repeat(3, 1fr);
+    border-top:1px solid var(--line);
+  }
+  .h-counter{
+    display:flex; align-items:baseline; justify-content:space-between; gap:12px 20px; flex-wrap:wrap;
+    min-height:64px; padding:18px 20px 20px; text-decoration:none;
+    border-left:1px solid var(--line);
+    transition:background .25s ease;
+  }
+  .h-counter:first-child{padding-left:0; border-left:0}
+  .h-counter.c-green .hc-label{color:var(--mali-green-hi)}
+  .h-counter.c-gold .hc-label{color:var(--mali-gold-hi)}
+  .h-counter.c-red .hc-label{color:var(--mali-red-hi)}
+  .h-counter:hover{background:var(--panel)}
+  .h-counter:active{background:var(--panel-2)}
+  .h-counter .hc-label{font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--muted)}
+  .h-counter .hc-num{font-size:clamp(30px, 5vw, 44px); font-weight:600; letter-spacing:-.03em; font-variant-numeric:tabular-nums; line-height:1}
+  .h-counter .hc-num small{font-size:.45em; color:var(--faint); font-weight:500; letter-spacing:-.01em}
+
+  /* ---------- Marquee ---------- */
+  .marquee{
+    border-bottom:1px solid rgba(255,255,255,.14);
+    overflow:hidden; white-space:nowrap;
+    padding:14px 0;
+    background:var(--forest-deep);
+  }
+  .marquee-track{
+    display:inline-block;
+    animation:marquee 30s linear infinite;
+    font-size:13px; font-weight:600; letter-spacing:.3em; text-transform:uppercase; color:rgba(255,255,255,.62);
+  }
+  .marquee-track b{color:var(--white); font-weight:600}
+  @keyframes marquee{from{transform:translateX(0)} to{transform:translateX(-50%)}}
+
+  /* ---------- Sections ---------- */
+  section.block{padding:clamp(56px, 9vw, 96px) 0; border-bottom:1px solid var(--line)}
+  .sec-head{display:flex; align-items:baseline; justify-content:space-between; gap:12px 24px; flex-wrap:wrap}
+  .sec-label{margin:0; font-size:12px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:var(--faint)}
+  .sec-title{
+    margin:14px 0 0;
+    font-size:clamp(34px, 6vw, 56px); line-height:1.02; font-weight:600; letter-spacing:-.025em;
+  }
+  .sec-title em{font-family:"Cormorant Garamond",Georgia,serif; font-style:italic; font-weight:500}
+  .sec-note{margin:0; font-size:13px; color:var(--muted); max-width:340px; line-height:1.6}
+
+  /* Mission */
+  .mission-lede{
+    margin:28px 0 0; max-width:880px;
+    font-size:clamp(21px, 3.4vw, 30px); line-height:1.4; font-weight:500; letter-spacing:-.01em;
+  }
+  .mission-lede span{color:var(--muted)}
+  .mission-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:1px;
+    background:var(--line); border:1px solid var(--line);
+    margin-top:40px;
+  }
+  .mission-cell{background:var(--bg); padding:24px; transition:background .25s ease}
+  .mission-cell:hover{background:var(--panel)}
+  .mission-cell .m-k{font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--faint)}
+  .mission-cell .m-v{display:block; margin-top:10px; font-size:19px; font-weight:600; line-height:1.3; letter-spacing:-.01em}
+  .mission-cell p{margin:8px 0 0; font-size:14px; color:var(--muted); line-height:1.6}
+  .mission-art{
+    margin:40px 0 0; padding:clamp(24px, 5vw, 44px);
+    background:#f4efe6; border:1px solid var(--line);
+    text-align:center;
+  }
+  .mission-art img{display:block; margin:0 auto; width:100%; max-width:340px; height:auto}
+  .mission-art figcaption{
+    margin:18px 0 0; font-size:13px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#5c5344;
+  }
+
+  /* Arms accordion */
+  .arms{margin-top:40px; border-top:1px solid var(--white)}
+  .arm{border-bottom:1px solid var(--line)}
+  .arm-btn{
+    display:grid; grid-template-columns:52px minmax(0,1fr) auto auto; gap:16px; align-items:center;
+    width:100%; padding:26px 8px; min-height:88px;
+    background:none; border:0; border-radius:0; cursor:pointer; text-align:left;
+    transition:background .2s ease, padding-left .25s ease;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .arm-btn:hover{background:var(--panel); padding-left:16px}
+  .arm-btn:active{background:var(--panel-2)}
+  .arm-num{font-size:13px; font-weight:600; letter-spacing:.14em; color:var(--faint); font-variant-numeric:tabular-nums}
+  .arm-name{display:block; font-size:clamp(24px, 4.4vw, 36px); font-weight:600; letter-spacing:-.02em; line-height:1.1}
+  .arm-line{display:block; margin-top:4px; font-size:15px; color:var(--muted)}
+  .arm-tag{
+    font-size:11px; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
+    border:1px solid var(--line); padding:6px 10px; color:var(--muted); white-space:nowrap;
+  }
+  .arm-mark{font-size:26px; font-weight:400; line-height:1; color:var(--muted); transition:transform .3s cubic-bezier(.22,.61,.21,1), color .2s ease}
+  .arm.open .arm-mark{transform:rotate(45deg); color:var(--white)}
+  .arm-detail{display:none; padding:0 8px 28px 68px; max-width:720px}
+  .arm.open .arm-detail{display:block; animation:fadeUp .45s cubic-bezier(.22,.61,.21,1) both}
+  .arm-detail p{margin:0; font-size:16px; line-height:1.65; color:var(--body)}
+  .arm-detail p + p{margin-top:10px}
+  .arm-detail b{color:var(--white); font-weight:600}
+
+  /* Product cards (home) */
+  .prod-cards{
+    display:grid; grid-template-columns:1fr 1fr; gap:1px;
+    background:var(--line); border:1px solid var(--line);
+    margin-top:40px;
+  }
+  .prod-card{background:var(--panel); padding:clamp(24px, 4vw, 40px); display:flex; flex-direction:column}
+  .prod-card-top{display:flex; justify-content:space-between; align-items:flex-start; gap:12px 16px; flex-wrap:wrap}
+  .prod-card-kicker{margin:0; font-size:12px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:var(--muted)}
+  .prod-card-name{margin:16px 0 0; font-size:clamp(38px, 6vw, 56px); line-height:.98; font-weight:700; letter-spacing:-.03em}
+  .prod-card-desc{margin:14px 0 0; font-size:16px; line-height:1.6; color:var(--body)}
+  .prod-card-desc b{color:var(--white); font-weight:600}
+  .prod-card-meta{
+    display:flex; flex-wrap:wrap; gap:6px 24px;
+    margin-top:22px; padding-top:18px; border-top:1px solid var(--line);
+    font-size:13px; color:var(--muted);
+  }
+  .prod-card-meta b{color:var(--white); font-weight:600; font-variant-numeric:tabular-nums}
+  .prod-card .btn{margin-top:26px; align-self:flex-start}
+
+  /* 2027 at a glance (home) */
+  .glance{margin-top:40px; border-top:1px solid var(--white)}
+  .glance-row{
+    display:grid; grid-template-columns:minmax(0,1fr) auto auto; gap:14px 28px; align-items:center;
+    padding:26px 8px; border-bottom:1px solid var(--line);
+    text-decoration:none; transition:background .2s ease, padding-left .25s ease;
+  }
+  .glance-row:hover{background:var(--panel); padding-left:16px}
+  .glance-row:active{background:var(--panel-2)}
+  .glance-k{display:block; font-size:12px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--faint)}
+  .glance-t{display:block; margin-top:6px; font-size:clamp(21px, 3.4vw, 28px); font-weight:600; letter-spacing:-.015em; line-height:1.2}
+  .glance-num{font-size:clamp(34px, 6vw, 52px); font-weight:600; letter-spacing:-.03em; font-variant-numeric:tabular-nums; line-height:1; white-space:nowrap}
+  .glance-num small{font-size:.42em; color:var(--faint); font-weight:500}
+  .glance-arrow{font-size:22px; color:var(--muted); line-height:1}
+
+  /* 2027 at a glance — deep forest field (Peekpanda manner) */
+  #goals-glance{
+    background:var(--forest-deep);
+    border-bottom-color:rgba(255,255,255,.14);
+  }
+  #goals-glance .sec-label{color:rgba(255,255,255,.55)}
+  #goals-glance .sec-note{color:rgba(255,255,255,.75)}
+  #goals-glance .glance{border-top-color:rgba(255,255,255,.85)}
+  #goals-glance .glance-row{border-bottom-color:rgba(255,255,255,.16)}
+  #goals-glance .glance-row:hover{background:rgba(255,255,255,.06); padding-left:16px}
+  #goals-glance .glance-row:active{background:rgba(255,255,255,.1)}
+  #goals-glance .glance-k{color:rgba(255,255,255,.55)}
+  #goals-glance .sec-title em{color:var(--mali-gold-hi)}
+  #goals-glance .glance-num small{color:rgba(255,255,255,.55)}
+  #goals-glance .glance-num small.t-green{color:#57b97e}
+  #goals-glance .glance-num small.t-gold{color:var(--mali-gold-hi)}
+  #goals-glance .glance-num small.t-red{color:#d97a6c}
+  #goals-glance .glance-arrow{color:rgba(255,255,255,.65)}
+
+  /* ---------- Subpage heads ---------- */
+  .page-head{
+    position:relative; overflow:hidden;
+    border-bottom:1px solid var(--line);
+    padding:clamp(44px, 8vh, 84px) 0 clamp(36px, 6vh, 60px);
+  }
+  .page-head .wrap{position:relative; z-index:1}
+  .page-head-photo-sabaq{background-image:url(assets/quran-man.jpg); background-position:center 30%}
+  .page-head-photo-baccprep{background-image:url(assets/mosque-crowd.jpg); background-position:center 35%}
+  .page-head-photo-giving{background-image:url(assets/mosque-three-men.jpg); background-position:center 28%}
+  .page-head-top{display:flex; justify-content:space-between; align-items:flex-start; gap:14px 20px; flex-wrap:wrap}
+  .page-kicker{margin:0; font-size:12px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:var(--muted)}
+  .page-title{
+    margin:18px 0 0;
+    font-size:clamp(56px, 12vw, 120px); line-height:.92; font-weight:700; letter-spacing:-.04em;
+  }
+  .page-title em{font-family:"Cormorant Garamond",Georgia,serif; font-style:italic; font-weight:500; letter-spacing:-.01em}
+  .page-lede{
+    margin:22px 0 0; max-width:720px;
+    font-size:clamp(20px, 3.2vw, 28px); line-height:1.4; font-weight:500; letter-spacing:-.01em;
+  }
+  .page-lede span{color:var(--muted)}
+  .page-sub{margin:16px 0 0; max-width:600px; font-size:16px; line-height:1.65; color:var(--muted)}
+  .page-sub b{color:var(--white); font-weight:600}
+
+  /* Feature grid (product pages) */
+  .feature-grid{
+    display:grid; grid-template-columns:repeat(2, 1fr); gap:1px;
+    background:var(--line); border:1px solid var(--line);
+    margin-top:40px;
+  }
+  .feature{background:var(--bg); padding:26px; transition:background .25s ease}
+  .feature:hover{background:var(--panel)}
+  .feature .f-num{font-size:12px; font-weight:600; letter-spacing:.16em; color:var(--faint); font-variant-numeric:tabular-nums}
+  .feature .f-name{display:block; margin-top:10px; font-size:20px; font-weight:600; line-height:1.3; letter-spacing:-.01em}
+  .feature p{margin:8px 0 0; font-size:15px; color:var(--muted); line-height:1.6}
+
+  /* Plan / price panel (product pages) */
+  .plan{
+    margin-top:40px; border:1px solid rgba(255,255,255,.3);
+    background:var(--forest);
+    padding:clamp(26px, 5vw, 44px);
+  }
+  .plan-top{display:flex; justify-content:space-between; gap:12px 20px; flex-wrap:wrap; align-items:flex-start}
+  .plan-kicker{margin:0; font-size:12px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.62)}
+  .plan-price{
+    margin:18px 0 0;
+    font-size:clamp(52px, 10vw, 84px); line-height:.95; font-weight:700; letter-spacing:-.035em; font-variant-numeric:tabular-nums;
+  }
+  .plan-price small{font-size:.32em; font-weight:500; color:rgba(255,255,255,.62); letter-spacing:0}
+  .plan-desc{margin:16px 0 0; max-width:620px; font-size:17px; line-height:1.6; color:#ddefe3}
+  .plan-desc b{color:var(--white); font-weight:600}
+  .plan .btn{margin-top:28px}
+  .plan-note{margin:16px 0 0; font-size:13px; line-height:1.6; color:rgba(255,255,255,.72)}
+  .plan-note b{color:var(--white); font-weight:600}
+
+  /* Stat strip (product pages) */
+  .stat-strip{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:1px;
+    background:var(--line); border:1px solid var(--line);
+    margin-top:40px;
+  }
+  .stat-cell{background:var(--panel); padding:22px}
+  .stat-cell .sv{display:block; font-size:clamp(26px, 4.4vw, 36px); font-weight:600; letter-spacing:-.02em; line-height:1.1; font-variant-numeric:tabular-nums}
+  .stat-cell .sk{display:block; margin-top:6px; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); line-height:1.5}
+
+  /* Goals (giving + baccprep pages) */
+  .goal{
+    margin-top:40px; border:1px solid var(--line);
+    background:var(--panel);
+    padding:clamp(24px, 4.5vw, 44px);
+  }
+  .goal-head{display:flex; justify-content:space-between; gap:10px 20px; flex-wrap:wrap; align-items:baseline}
+  .goal-label{margin:0; font-size:12px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:var(--faint)}
+  .goal-status{font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--muted)}
+  .goal-title{margin:12px 0 0; font-size:clamp(30px, 5.4vw, 46px); line-height:1.05; font-weight:600; letter-spacing:-.02em}
+  .goal-title em{font-family:"Cormorant Garamond",Georgia,serif; font-style:italic; font-weight:500}
+  .big-row{display:flex; align-items:baseline; flex-wrap:wrap; gap:6px 16px; margin:22px 0 0}
+  .big-row p{margin:0}
+  .big-num{font-size:clamp(64px, 13vw, 96px); line-height:.9; font-weight:600; letter-spacing:-.04em; font-variant-numeric:tabular-nums}
+  .big-target{font-size:17px; line-height:1.4; color:var(--muted)}
+  .big-target b{color:var(--white); font-weight:600}
+  .actual-line{margin:14px 0 0; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--muted)}
+  .actual-line b{color:var(--white)}
+  .goal-desc{margin:18px 0 0; font-size:16px; line-height:1.65; color:var(--body); max-width:640px}
+  .goal-desc b{color:var(--white); font-weight:600}
+  .price-row{
+    display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px 20px;
+    margin-top:26px; padding:18px 0; border-top:1px solid var(--white); border-bottom:1px solid var(--line);
+  }
+  .price-row .k{font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--muted)}
+  .price-row .v{font-size:22px; font-weight:600; letter-spacing:-.01em; font-variant-numeric:tabular-nums}
+  .price-row .v small{font-size:14px; font-weight:400; color:var(--muted)}
+
+  /* Planning tools */
+  .planner{margin-top:30px; padding:24px; border:1px solid var(--line); background:var(--bg)}
+  .planner-head{display:flex; align-items:center; justify-content:space-between; gap:10px 16px; flex-wrap:wrap}
+  .planner-head h4{margin:0; font-size:20px; line-height:1.2; font-weight:600; letter-spacing:-.01em}
+  .tag{
+    flex:none; padding:6px 9px; border:1px solid var(--white);
+    font-size:11px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; white-space:nowrap; line-height:1.4;
+  }
+  .planner-text{margin:16px 0 0; font-size:15px; line-height:1.6; color:var(--muted); max-width:640px}
+  .planner-text b{color:var(--white); font-weight:600}
+  .planner-note{margin:16px 0 0; font-size:13px; line-height:1.6; color:var(--muted)}
+  .planner-note b{color:var(--white); font-weight:600}
+  .basket-summary{display:flex; align-items:center; justify-content:space-between; gap:16px 20px; flex-wrap:wrap; margin-top:20px; padding-top:20px; border-top:1px solid var(--line)}
+  .basket-total-line{margin:0; font-variant-numeric:tabular-nums}
+  .basket-total-value{font-size:clamp(30px, 8vw, 40px); font-weight:600; letter-spacing:-.03em; line-height:1}
+  .basket-total-sub{display:block; margin-top:6px; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--muted)}
+  .reset-btn{
+    display:inline-flex; align-items:center; justify-content:center;
+    min-height:48px; padding:12px 20px; background:transparent; border:1px solid var(--white); border-radius:0; cursor:pointer;
+    font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--white);
+    transition:background .2s ease, color .2s ease;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .reset-btn:hover{background:var(--white); color:var(--black)}
+  .reset-btn:active{transform:translateY(1px)}
+  .meter{margin-top:20px}
+  .meter-label{display:flex; justify-content:space-between; gap:16px; margin-bottom:8px; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--muted)}
+  .meter-label span:last-child{color:var(--white); font-variant-numeric:tabular-nums}
+  .track-bar{height:2px; background:var(--line); position:relative; overflow:hidden}
+  .track-fill{height:100%; width:0%; background:var(--emerald); transition:width .45s cubic-bezier(.22,.61,.21,1)}
+  .ticks{display:flex; justify-content:space-between; margin-top:8px; font-size:12px; font-weight:500; color:var(--faint); font-variant-numeric:tabular-nums}
+  .ticks span:first-child{color:var(--white)}
+  .proj-output{display:flex; align-items:baseline; justify-content:space-between; gap:8px 20px; flex-wrap:wrap; margin-top:20px; padding-top:20px; border-top:1px solid var(--line); font-variant-numeric:tabular-nums}
+  .proj-output p{margin:0; font-size:28px; font-weight:600; letter-spacing:-.02em; line-height:1.1}
+  .proj-output small{display:block; margin-top:4px; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--muted)}
+  .slider-label{display:block; margin-top:20px; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--muted)}
+  input[type="range"]{-webkit-appearance:none; appearance:none; display:block; width:100%; height:28px; margin:10px 0 0; background:transparent; cursor:pointer}
+  input[type="range"]::-webkit-slider-runnable-track{height:2px; background:var(--white)}
+  input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none; appearance:none; width:22px; height:22px; margin-top:-10px; background:var(--mali-gold); border:1px solid var(--black); border-radius:0}
+  input[type="range"]::-moz-range-track{height:2px; background:var(--white)}
+  input[type="range"]::-moz-range-thumb{width:20px; height:20px; background:var(--mali-gold); border:1px solid var(--black); border-radius:0}
+  input[type="range"]:focus-visible{outline:2px solid var(--white); outline-offset:3px}
+
+  /* Giving items */
+  .list-label{margin:32px 0 0; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--muted)}
+  .checklist{list-style:none; margin:12px 0 0; padding:0; border-top:1px solid var(--white)}
+  .item{border-bottom:1px solid var(--line)}
+  .item.open{background:var(--panel-2)}
+  .item-row{display:grid; grid-template-columns:18px minmax(0,1fr) auto auto; gap:12px; align-items:center; padding:16px 8px; min-height:76px}
+  .box{width:17px; height:17px; border:1.5px solid var(--white); flex:none}
+  .item-name-btn{
+    display:flex; align-items:center; gap:10px; min-width:0; min-height:48px; padding:6px 0;
+    background:none; border:0; border-radius:0; cursor:pointer; text-align:left;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .item-name-btn:active{opacity:.75}
+  .item-text{flex:0 1 auto; min-width:0}
+  .item-name{display:block; font-size:17px; font-weight:400; line-height:1.3}
+  .item-unit{display:block; margin-top:2px; font-size:13px; color:var(--muted)}
+  .chev{color:var(--muted); font-size:19px; line-height:1.3; flex:none; transition:transform .25s ease}
+  .item.open .chev{transform:rotate(180deg)}
+  .stepper{display:flex; align-items:stretch; border:1px solid var(--white)}
+  .step-btn{
+    width:44px; height:44px; padding:0; background:none; border:0; border-radius:0; cursor:pointer;
+    font-size:18px; line-height:1; color:var(--white);
+    transition:background .15s ease, color .15s ease;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .step-btn:first-child{border-right:1px solid var(--white)}
+  .step-btn:last-child{border-left:1px solid var(--white)}
+  .step-btn:hover:not(:disabled){background:var(--mali-gold); color:var(--mali-gold-ink)}
+  .step-btn:active:not(:disabled){background:var(--panel-2); color:var(--white)}
+  .step-btn:disabled{color:var(--faint); cursor:default}
+  .step-qty{min-width:44px; display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:600; font-variant-numeric:tabular-nums}
+  .item-total{font-size:17px; font-weight:600; letter-spacing:-.01em; white-space:nowrap; text-align:right; min-width:62px; font-variant-numeric:tabular-nums}
+  .item-detail{display:none; margin:0; padding:0 8px 20px 38px; font-size:15px; color:var(--muted); line-height:1.55}
+  .item.open .item-detail{display:block}
+  .item-detail b{color:var(--white); font-weight:600}
+  .item-detail .st{display:inline-block; margin-top:8px; font-size:11px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--muted)}
+  .totals{margin-top:0}
+  .total-row{display:flex; justify-content:space-between; align-items:baseline; gap:12px; padding:20px 8px; border-bottom:1px solid var(--line)}
+  .total-row .k{font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--muted)}
+  .total-row .v{font-size:26px; font-weight:600; letter-spacing:-.02em; font-variant-numeric:tabular-nums}
+  .total-row .v small{font-size:13px; font-weight:400; color:var(--muted); letter-spacing:0}
+  .note{margin:24px 0 0; font-size:15px; line-height:1.6; color:var(--muted)}
+  .note b{color:var(--white); font-weight:600}
+  .independence{margin:12px 0 0; font-size:15px; line-height:1.6; color:var(--muted)}
+  .independence b{color:var(--white); font-weight:600}
+  .ext-links{margin:32px 0 0; border-top:1px solid var(--white)}
+  .ext{
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+    min-height:64px; padding:18px 8px; border-bottom:1px solid var(--line);
+    text-decoration:none; font-size:17px; font-weight:600;
+    transition:padding-left .25s ease, background .2s ease;
+  }
+  .ext:hover{padding-left:16px; background:var(--panel-2)}
+  .ext:active{background:var(--panel)}
+  .ext small{display:block; margin-top:2px; font-size:13px; font-weight:400; color:var(--muted)}
+  .ext .arrow{font-size:17px; font-weight:400; color:var(--muted); flex:none}
+
+  /* Updates */
+  .update{
+    display:grid; grid-template-columns:190px minmax(0,1fr); gap:8px 32px;
+    margin-top:36px; padding:28px 0 4px; border-top:1px solid var(--white);
+  }
+  .update-date{font-size:13px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); padding-top:4px}
+  .update-body h3{margin:0; font-size:clamp(21px, 3.4vw, 27px); font-weight:600; letter-spacing:-.015em; line-height:1.25}
+  .update-body p{margin:10px 0 0; font-size:16px; line-height:1.65; color:var(--body); max-width:640px}
+  .update-body p b{color:var(--white); font-weight:600}
+
+  /* Footer */
+  footer{padding:clamp(48px, 8vw, 80px) 0 40px}
+  .foot-line{
+    margin:0;
+    font-size:clamp(30px, 6vw, 54px); line-height:1.1; font-weight:600; letter-spacing:-.025em; max-width:820px;
+  }
+  .foot-line em{font-family:"Cormorant Garamond",Georgia,serif; font-style:italic; font-weight:500}
+  .foot-meta{
+    display:flex; justify-content:space-between; gap:12px 32px; flex-wrap:wrap;
+    margin-top:40px; padding-top:20px; border-top:1px solid var(--line);
+  }
+  .foot-meta p{margin:0; font-size:13px; line-height:1.6; color:var(--muted); max-width:640px}
+  .foot-meta p b{color:var(--white); font-weight:600}
+  .foot-meta a{text-decoration:underline; text-underline-offset:3px}
+  .foot-date{font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--white); white-space:nowrap}
+
+  @media (max-width:760px){
+    .topbar-inner{flex-wrap:wrap; padding-top:6px; padding-bottom:6px; row-gap:0}
+    .topnav{order:3; width:100%; justify-content:space-between; gap:2px; border-top:1px solid var(--line)}
+    .topnav a{flex:1; justify-content:center; padding:6px 4px; letter-spacing:.1em}
+    .wordmark span{display:none}
+    .pillars{grid-template-columns:1fr}
+    .pillar{border-left:0; border-top:1px solid var(--line); padding:18px 0 20px}
+    .pillar:first-child{border-top:0}
+    .hero-counters{grid-template-columns:1fr}
+    .h-counter{padding:16px 0 18px; border-left:0; border-bottom:1px solid var(--line)}
+    .h-counter:last-child{border-bottom:0}
+    .mission-grid{grid-template-columns:1fr}
+    .prod-cards{grid-template-columns:1fr}
+    .prod-card .btn{align-self:stretch}
+    .feature-grid{grid-template-columns:1fr}
+    .stat-strip{grid-template-columns:1fr}
+    .glance-row{grid-template-columns:minmax(0,1fr) auto; padding:22px 4px}
+    .glance-arrow{display:none}
+    .plan .btn{width:100%}
+    .arm-btn{grid-template-columns:38px minmax(0,1fr) auto; padding:22px 4px}
+    .arm-tag{display:none}
+    .arm-detail{padding-left:54px}
+    .update{grid-template-columns:1fr}
+    .planner{padding:20px 16px}
+    .item-row{grid-template-columns:18px minmax(0,1fr) auto; padding:14px 8px}
+    .item-total{grid-column:3; grid-row:1}
+    .stepper{grid-column:2 / 4; grid-row:2; justify-self:start}
+    .item-detail{padding-left:38px}
+    input[type="range"]::-webkit-slider-thumb{width:26px; height:26px; margin-top:-12px}
+    input[type="range"]::-moz-range-thumb{width:24px; height:24px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{transition:none !important; animation:none !important}
+    .rv{opacity:1; transform:none}
+    .intro{display:none}
+  }
+</style>
+<noscript><style>.intro{display:none} html.intro-on{overflow:visible} html.intro-on .topbar, html.intro-on main *, html.intro-on footer *{animation-play-state:running}</style></noscript>
+</head>
+<body>
+
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="intro-inner">
+    <p class="intro-ar" lang="ar" dir="rtl">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+    <p class="intro-tr">Bismillahirrahmanirrahim</p>
+  </div>
+</div>
+
+<header class="topbar">
+  <div class="bismillah">
+    <span class="ar" lang="ar" dir="rtl">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</span>
+    <span class="tr">Bismillahirrahmanirrahim</span>
+  </div>
+  <div class="topbar-inner">
+    <a class="wordmark" href="#/" data-route-link="home">SDG <span>— Sahel Development Group</span></a>
+    <nav class="topnav" aria-label="Pages">
+      <a href="#/" data-route-link="home">Home</a>
+      <a href="#/sabaq" data-route-link="sabaq">Sabaq</a>
+      <a href="#/baccprep" data-route-link="baccprep">BaccPrep</a>
+      <a href="#/giving" data-route-link="giving">Giving</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ PAGE: HOME ============ -->
+<main class="page" data-page="home">
+
+<div class="hero">
+  <div class="photo-bg hero-photo" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="hero-eyebrow">
+      <span>Sahel Development Group</span>
+      <span>Columbus, Ohio — building for the Sahel</span>
+    </div>
+    <h1 class="hero-title" aria-label="Sahel Development Group">
+      <span class="line"><span class="w-green">Sahel</span></span>
+      <span class="line"><span class="w-red">Development</span></span>
+      <span class="line"><span class="w-gold">Group</span></span>
+    </h1>
+    <p class="hero-mission">Improving infrastructure across the Sahel — <em>architecture, technology, and finance.</em></p>
+    <p class="hero-sub">One company, three pillars. Built by the diaspora, with people on the ground, for Mali and the wider Sahel.</p>
+
+    <div class="pillars">
+      <div class="pillar">
+        <span class="p-num">01</span>
+        <span class="p-name">Architecture</span>
+        <span class="p-line">Design and building, done properly from the first drawing.</span>
+      </div>
+      <div class="pillar">
+        <span class="p-num">02</span>
+        <span class="p-name">Technology</span>
+        <span class="p-line">Tools and access that work where the connection is thin.</span>
+      </div>
+      <div class="pillar">
+        <span class="p-num">03</span>
+        <span class="p-name">Finance</span>
+        <span class="p-line">Payments and economic access for people the banks skip.</span>
+      </div>
+    </div>
+
+    <div class="hero-counters">
+      <a class="h-counter c-green" href="#/sabaq">
+        <span class="hc-label">2027 · Sabaq users</span>
+        <span class="hc-num">0 <small>/ 300</small></span>
+      </a>
+      <a class="h-counter c-gold" href="#/baccprep">
+        <span class="hc-label">2027 · BaccPrep users</span>
+        <span class="hc-num">0 <small>/ 300</small></span>
+      </a>
+      <a class="h-counter c-red" href="#/giving">
+        <span class="hc-label">2027 · Giving funded</span>
+        <span class="hc-num">$0 <small>/ $3,000</small></span>
+      </a>
+    </div>
+  </div>
+  <div class="tricolor" aria-hidden="true"></div>
+</div>
+
+<div class="marquee" aria-hidden="true">
+  <span class="marquee-track"><b>Architecture</b> &nbsp;·&nbsp; Technology &nbsp;·&nbsp; <b>Finance</b> &nbsp;·&nbsp; One group &nbsp;·&nbsp; <b>Building for the Sahel</b> &nbsp;·&nbsp; Architecture &nbsp;·&nbsp; <b>Technology</b> &nbsp;·&nbsp; Finance &nbsp;·&nbsp; <b>Architecture</b> &nbsp;·&nbsp; Technology &nbsp;·&nbsp; <b>Finance</b> &nbsp;·&nbsp; One group &nbsp;·&nbsp; <b>Building for the Sahel</b> &nbsp;·&nbsp; Architecture &nbsp;·&nbsp; <b>Technology</b> &nbsp;·&nbsp; Finance &nbsp;·&nbsp; </span>
+</div>
+
+<section class="block" id="mission">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <p class="sec-label">Mission</p>
+        <h2 class="sec-title">One group.<br />Built for <em>the Sahel.</em></h2>
+      </div>
+      <p class="sec-note">No slogans about changing the world. Just the work, stated plainly.</p>
+    </div>
+    <p class="mission-lede rv d1">Sahel Development Group is one company building across <b>architecture, technology, and finance</b> — <span>the three things a place needs before anything else can move.</span> We start where our own people are: Mali, then the wider Sahel.</p>
+    <div class="mission-grid rv d2">
+      <div class="mission-cell">
+        <span class="m-k">Based</span>
+        <span class="m-v">Columbus, Ohio</span>
+        <p>Run from the United States, where the capital, the customers, and the diaspora are.</p>
+      </div>
+      <div class="mission-cell">
+        <span class="m-k">Building for</span>
+        <span class="m-v">Mali &amp; the wider Sahel</span>
+        <p>Products and services designed for the ground they will actually run on.</p>
+      </div>
+      <div class="mission-cell">
+        <span class="m-k">How</span>
+        <span class="m-v">Diaspora-first</span>
+        <p>Built from abroad, with people on the ground. The diaspora pays, the Sahel benefits.</p>
+      </div>
+    </div>
+    <figure class="mission-art rv d3">
+      <img src="assets/handprints-africa.jpg" alt="Brown and gold handprints pressed together to form the shape of Africa" width="371" height="500" />
+      <figcaption>Many hands, one continent</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="block" id="what-we-do">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <p class="sec-label">What we do</p>
+        <h2 class="sec-title">Four arms.<br />One <em class="em-gold">mission.</em></h2>
+      </div>
+      <p class="sec-note">Tap any arm to open it. Each one is a working direction of the group — stated as it is, not dressed up.</p>
+    </div>
+
+    <div class="arms rv d1">
+      <div class="arm" id="arm-design">
+        <button type="button" class="arm-btn" aria-expanded="false" aria-controls="arm-design-detail">
+          <span class="arm-num">01</span>
+          <span>
+            <span class="arm-name">SDG Design</span>
+            <span class="arm-line">3D design for building.</span>
+          </span>
+          <span class="arm-tag">Architecture</span>
+          <span class="arm-mark" aria-hidden="true">+</span>
+        </button>
+        <div class="arm-detail" id="arm-design-detail">
+          <p>See the building before anyone pours concrete. <b>SDG Design turns a plot and an idea into a full 3D design</b> — so a family building from abroad knows exactly what they are paying for before the first brick is laid.</p>
+          <p>Design is the front door of the group: it is where trust starts.</p>
+        </div>
+      </div>
+
+      <div class="arm" id="arm-pay">
+        <button type="button" class="arm-btn" aria-expanded="false" aria-controls="arm-pay-detail">
+          <span class="arm-num">02</span>
+          <span>
+            <span class="arm-name">SDG Pay</span>
+            <span class="arm-line">Payments.</span>
+          </span>
+          <span class="arm-tag">Finance</span>
+          <span class="arm-mark" aria-hidden="true">+</span>
+        </button>
+        <div class="arm-detail" id="arm-pay-detail">
+          <p>Money has to move before anything else can. <b>SDG Pay is the payments arm</b> — built for how people in the Sahel actually send, receive, and hold money, including where the banking system does not reach.</p>
+        </div>
+      </div>
+
+      <div class="arm" id="arm-connect">
+        <button type="button" class="arm-btn" aria-expanded="false" aria-controls="arm-connect-detail">
+          <span class="arm-num">03</span>
+          <span>
+            <span class="arm-name">SDG Connect</span>
+            <span class="arm-line">Wi-Fi routers for local businesses.</span>
+          </span>
+          <span class="arm-tag">Technology</span>
+          <span class="arm-mark" aria-hidden="true">+</span>
+        </button>
+        <div class="arm-detail" id="arm-connect-detail">
+          <p>A shop with good Wi-Fi keeps its customers longer. <b>SDG Connect puts routers into local businesses</b> — connectivity as a service a small business can actually run, not a contract it cannot afford.</p>
+        </div>
+      </div>
+
+      <div class="arm" id="arm-certificates">
+        <button type="button" class="arm-btn" aria-expanded="false" aria-controls="arm-certificates-detail">
+          <span class="arm-num">04</span>
+          <span>
+            <span class="arm-name">SDG Certificates</span>
+            <span class="arm-line">Land documents, without the runaround.</span>
+          </span>
+          <span class="arm-tag">Architecture</span>
+          <span class="arm-mark" aria-hidden="true">+</span>
+        </button>
+        <div class="arm-detail" id="arm-certificates-detail">
+          <p>Buying land is easy. Proving it is yours is the hard part. <b>SDG Certificates helps land buyers get their certificates and documents quickly and easily</b> — the paperwork handled properly, so ownership is never a question.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="products">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <p class="sec-label">Products</p>
+        <h2 class="sec-title">Two products.<br />Both <em class="em-red">in the workshop.</em></h2>
+      </div>
+      <p class="sec-note">Neither is finished. Both are being built now, under the same roof — open either one to see where it stands.</p>
+    </div>
+
+    <div class="prod-cards rv d1">
+      <div class="prod-card">
+        <div class="prod-card-top">
+          <p class="prod-card-kicker">Product · Technology</p>
+          <span class="chip">Building soon</span>
+        </div>
+        <h3 class="prod-card-name">Sabaq</h3>
+        <p class="prod-card-desc">An AI coach for memorizing the Quran. <b>It listens while you recite and answers back in the moment</b> — in Hafs or Warsh — while parents follow along from their own dashboard.</p>
+        <div class="prod-card-meta">
+          <span><b>$60</b> / month, all-access</span>
+          <span>Hafs &amp; Warsh</span>
+          <span>2027 goal · <b>0 of 300</b> users</span>
+        </div>
+        <a class="btn btn-ghost" href="#/sabaq">Inside Sabaq <span class="btn-arrow" aria-hidden="true">→</span></a>
+      </div>
+
+      <div class="prod-card">
+        <div class="prod-card-top">
+          <p class="prod-card-kicker">Product · Technology</p>
+          <span class="chip chip-gold">Building soon</span>
+        </div>
+        <h3 class="prod-card-name">BaccPrep</h3>
+        <p class="prod-card-desc">Bac exam preparation for students in Mali. <b>Families abroad pay for the programme; students at home do the work</b> — and every bit of progress shows up live for the people who paid.</p>
+        <div class="prod-card-meta">
+          <span><b>$300</b> · or 3 × $100</span>
+          <span>Launching 2027</span>
+          <span>2027 goal · <b>0 of 300</b> users</span>
+        </div>
+        <a class="btn btn-ghost" href="#/baccprep">Inside BaccPrep <span class="btn-arrow" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="goals-glance">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <p class="sec-label">2027 Goals</p>
+        <h2 class="sec-title">The year,<br />in <em>three numbers.</em></h2>
+      </div>
+      <p class="sec-note">Announced October 29, 2026. All three counters open at zero — and stay there until something real happens.</p>
+    </div>
+
+    <div class="glance rv d1">
+      <a class="glance-row" href="#/sabaq">
+        <span>
+          <span class="glance-k">Goal 01 · Product</span>
+          <span class="glance-t">Three hundred learners on Sabaq</span>
+        </span>
+        <span class="glance-num">0 <small class="t-green">/ 300</small></span>
+        <span class="glance-arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="glance-row" href="#/baccprep">
+        <span>
+          <span class="glance-k">Goal 02 · Product</span>
+          <span class="glance-t">Three hundred students on BaccPrep</span>
+        </span>
+        <span class="glance-num">0 <small class="t-gold">/ 300</small></span>
+        <span class="glance-arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="glance-row" href="#/giving">
+        <span>
+          <span class="glance-k">Goal 03 · Giving</span>
+          <span class="glance-t">Three thousand dollars of named items for families in Mali</span>
+        </span>
+        <span class="glance-num">$0 <small class="t-red">/ $3,000</small></span>
+        <span class="glance-arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="updates">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <p class="sec-label">Updates</p>
+        <h2 class="sec-title">The <em>record.</em></h2>
+      </div>
+      <p class="sec-note">Entries land here when something real happens — and only then.</p>
+    </div>
+    <article class="update rv d1">
+      <p class="update-date">October 29, 2026</p>
+      <div class="update-body">
+        <h3>We announced our 2027 goals.</h3>
+        <p><b>Sabaq and BaccPrep to 300 users each</b>, and <b>$3,000 of giving for families in Mali</b> through the Mali Wellness Foundation. All three start at zero.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ PAGE: SABAQ ============ -->
+<main class="page" data-page="sabaq" hidden>
+
+<div class="page-head">
+  <div class="photo-bg page-head-photo-sabaq" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="page-head-top">
+      <p class="page-kicker">Product · Sahel Development Group</p>
+      <span class="chip">Building soon</span>
+    </div>
+    <h1 class="page-title">Sabaq</h1>
+    <p class="page-lede">An AI Quran memorization coach — <span>the first multi interactive AI Quranic platform.</span></p>
+    <p class="page-sub">Memorizing alone is hard to sustain: nobody hears your mistakes, and nobody notices when you stop. Sabaq sits across from you instead — <b>it listens, it corrects, and it keeps the record</b> — so practice keeps moving between lessons, not just during them.</p>
+  </div>
+</div>
+
+<section class="block">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <p class="sec-label">How it works</p>
+        <h2 class="sec-title">Recite. Get corrected.<br /><em>Keep going.</em></h2>
+      </div>
+      <p class="sec-note">Four pieces, one loop: you recite, the coach responds, and the people who support you can see it working.</p>
+    </div>
+
+    <div class="feature-grid rv d1">
+      <div class="feature">
+        <span class="f-num">01</span>
+        <span class="f-name">Live recitation feedback</span>
+        <p>Sabaq listens while you recite and responds as you go — mistakes surface in the moment, while the verse is still in front of you, not days later in a lesson.</p>
+      </div>
+      <div class="feature">
+        <span class="f-num">02</span>
+        <span class="f-name">Hafs and Warsh</span>
+        <p>Two readings, both supported. Recite in the riwayah you learned — the coach follows your reading instead of forcing you into someone else's.</p>
+      </div>
+      <div class="feature">
+        <span class="f-num">03</span>
+        <span class="f-name">A dashboard for parents</span>
+        <p>Parents can follow progress from their own view — what was practiced, how it went, whether the habit is holding — without sitting in on every session.</p>
+      </div>
+      <div class="feature">
+        <span class="f-num">04</span>
+        <span class="f-name">Wherever you are starting from</span>
+        <p>Made for beginners opening the Quran for the first time, solo learners with no teacher nearby, and adults finding their way back to it after years away.</p>
+      </div>
+    </div>
+
+    <div class="plan rv d2">
+      <div class="plan-top">
+        <p class="plan-kicker">The plan</p>
+        <span class="chip">Waitlist open</span>
+      </div>
+      <p class="plan-price">$60 <small>/ month</small></p>
+      <p class="plan-desc">One plan, everything in it. <b>No tiers, no locked features, nothing held back for a higher price</b> — a single all-access subscription, the same for a parent buying for a child as for an adult learning alone.</p>
+      <a class="btn btn-solid" href="https://getsabaq.com" target="_blank" rel="noopener noreferrer">Join the waitlist <span class="btn-arrow" aria-hidden="true">↗</span></a>
+      <p class="plan-note">Joining the waitlist costs nothing. <b>Waitlist members get 3 months free at launch.</b></p>
+    </div>
+
+    <div class="goal rv d2">
+      <div class="goal-head">
+        <p class="goal-label">2027 Goal · Product</p>
+        <span class="goal-status">Sabaq</span>
+      </div>
+      <h3 class="goal-title">Three hundred users in the first year</h3>
+      <div class="big-row">
+        <p class="big-num">0</p>
+        <p class="big-target"><b>users so far</b> &nbsp;·&nbsp; target 300</p>
+      </div>
+      <p class="actual-line">Actual progress: <b>0%</b> &nbsp;·&nbsp; 0 of 300 users</p>
+      <p class="goal-desc">The counter starts at zero and moves only when real learners are subscribed. <b>Nothing is pre-sold, and no one is counted early.</b></p>
+      <div class="price-row">
+        <span class="k">Subscription</span>
+        <span class="v">$60 <small>/ month, all-access</small></span>
+      </div>
+
+      <div class="planner" aria-labelledby="sabaq-proj-title">
+        <div class="planner-head">
+          <h4 id="sabaq-proj-title">Projection</h4>
+          <span class="tag">Projection — planning tool</span>
+        </div>
+        <p class="planner-text">Drag the slider to model what different subscriber levels would total at $60 a month. <b>This is a projection only.</b> It touches nothing real: the user count above stays at 0 until learners actually subscribe.</p>
+        <div class="proj-output" aria-live="polite">
+          <p><span id="sabaqProjUsers">0</span><small>Projected users</small></p>
+          <p><span id="sabaqProjTotal">$0</span><small>Projected monthly total</small></p>
+        </div>
+        <label class="slider-label" for="sabaqProjSlider">Projected users</label>
+        <input id="sabaqProjSlider" type="range" min="0" max="300" step="5" value="0" aria-describedby="sabaqProjNote" />
+        <div class="ticks" aria-hidden="true"><span>0</span><span>75</span><span>150</span><span>225</span><span>300</span></div>
+        <p class="planner-note" id="sabaqProjNote">At $60 per user per month. <b id="sabaqProjPct">0% of the 300-user target.</b> Projection only; actual progress stays at 0%.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ PAGE: BACCPREP ============ -->
+<main class="page" data-page="baccprep" hidden>
+
+<div class="page-head">
+  <div class="photo-bg page-head-photo-baccprep" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="page-head-top">
+      <p class="page-kicker">Product · Sahel Development Group</p>
+      <span class="chip chip-gold">Building soon</span>
+    </div>
+    <h1 class="page-title">BaccPrep</h1>
+    <p class="page-lede">Bac exam preparation for West Africa — <span>built first for students in Mali.</span></p>
+    <p class="page-sub">The bac decides a student's next decade, and most prepare for it nearly blind: practice happens, but nobody can see whether it is working. BaccPrep closes that gap — <b>students prepare on the platform, and the family paying from abroad watches the progress live.</b></p>
+  </div>
+</div>
+
+<section class="block">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <p class="sec-label">The offer</p>
+        <h2 class="sec-title">One programme.<br />One <em class="em-gold">price.</em></h2>
+      </div>
+      <p class="sec-note">No tiers and no upsells. The whole programme, for every student, at the same price.</p>
+    </div>
+
+    <div class="stat-strip rv d1">
+      <div class="stat-cell">
+        <span class="sv">$300</span>
+        <span class="sk">Programme · or 3 × $100</span>
+      </div>
+      <div class="stat-cell">
+        <span class="sv">2027</span>
+        <span class="sk">Launch year</span>
+      </div>
+      <div class="stat-cell">
+        <span class="sv">Building soon</span>
+        <span class="sk">Status · not yet on sale</span>
+      </div>
+    </div>
+
+    <div class="goal rv d1">
+      <div class="goal-head">
+        <p class="goal-label">2027 Goal · Business</p>
+        <span class="goal-status">BaccPrep</span>
+      </div>
+      <h3 class="goal-title">Three hundred users in the first year</h3>
+      <div class="big-row">
+        <p class="big-num">0</p>
+        <p class="big-target"><b>users so far</b> &nbsp;·&nbsp; target 300</p>
+      </div>
+      <p class="actual-line">Actual progress: <b>0%</b> &nbsp;·&nbsp; 0 of 300 users</p>
+      <p class="goal-desc">The counter starts at zero and moves only when real students are on the programme. <b>Nothing is pre-sold, and no one is counted early.</b></p>
+      <div class="price-row">
+        <span class="k">Programme price</span>
+        <span class="v">$300 <small>· 3 × $100</small></span>
+      </div>
+
+      <div class="planner" aria-labelledby="proj-title">
+        <div class="planner-head">
+          <h4 id="proj-title">Projection</h4>
+          <span class="tag">Projection — planning tool</span>
+        </div>
+        <p class="planner-text">Drag the slider to model what different enrolment levels would total at the programme price. <b>This is a projection only.</b> It touches nothing real: the user count above stays at 0 until students actually join.</p>
+        <div class="proj-output" aria-live="polite">
+          <p><span id="projUsers">0</span><small>Projected users</small></p>
+          <p><span id="projTotal">$0</span><small>Projected programme total</small></p>
+        </div>
+        <label class="slider-label" for="projSlider">Projected users</label>
+        <input id="projSlider" type="range" min="0" max="300" step="5" value="0" aria-describedby="projNote" />
+        <div class="ticks" aria-hidden="true"><span>0</span><span>75</span><span>150</span><span>225</span><span>300</span></div>
+        <p class="planner-note" id="projNote">At $300 per user — 3 × $100. <b id="projPct">0% of the 300-user target.</b> Projection only; actual progress stays at 0%.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ PAGE: GIVING ============ -->
+<main class="page" data-page="giving" hidden>
+
+<div class="page-head">
+  <div class="photo-bg page-head-photo-giving" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="page-head-top">
+      <p class="page-kicker">Giving · 2027</p>
+      <span class="chip chip-red-o">$0 funded so far</span>
+    </div>
+    <h1 class="page-title">Giving <em class="em-red">2027</em></h1>
+    <p class="page-lede">Three thousand dollars, six named items, <span>families in Mali at the other end.</span></p>
+    <p class="page-sub">No vague fund and no general appeal. Every dollar in this goal is attached to a specific item at a listed price, bought through the <b>Mali Wellness Foundation's</b> donation store — and an item only counts once its funding is in and its delivery is confirmed.</p>
+  </div>
+</div>
+
+<section class="block">
+  <div class="wrap">
+    <div class="goal rv" style="margin-top:0">
+      <div class="goal-head">
+        <p class="goal-label">2027 Goal · Giving</p>
+        <span class="goal-status">Mali Wellness Foundation</span>
+      </div>
+      <h3 class="goal-title">The $3,000 contribution</h3>
+      <div class="big-row">
+        <p class="big-num">$0</p>
+        <p class="big-target"><b>funded</b> &nbsp;·&nbsp; target $3,000</p>
+      </div>
+      <p class="actual-line">Actually funded: <b>0%</b> &nbsp;·&nbsp; $0 of $3,000</p>
+
+      <div class="planner" aria-labelledby="basket-title">
+        <div class="planner-head">
+          <h4 id="basket-title">Basket builder</h4>
+          <span class="tag">Planning tool</span>
+        </div>
+        <p class="planner-text">Change the quantities to sketch out a different mix. <b>Planning a basket donates nothing and funds nothing</b> — the funded figure above stays at $0 until a gift is actually made and delivery is confirmed.</p>
+        <div class="basket-summary">
+          <p class="basket-total-line">
+            <span class="basket-total-value" id="basketTotal" aria-live="polite">$3,000</span>
+            <span class="basket-total-sub">Planned basket total</span>
+          </p>
+          <button type="button" class="reset-btn" id="basketReset">Reset basket</button>
+        </div>
+        <div class="meter">
+          <div class="meter-label"><span>Basket vs $3,000 goal — planning only</span><span id="basketPct">100%</span></div>
+          <div class="track-bar" role="progressbar" id="basketMeter" aria-label="Planned basket total compared with the 3,000 dollar goal, planning only" aria-valuemin="0" aria-valuemax="3000" aria-valuenow="3000"><div class="track-fill" id="basketFill" style="width:100%"></div></div>
+        </div>
+        <p class="planner-note">The starting mix: 10 goats, 20 school supply kits, 10 baby kits, seeds, 1 corneal transplant surgery, 10 feminine hygiene kits — $3,000 in total. Reset puts those quantities back.</p>
+      </div>
+
+      <p class="list-label">The six items · Unit prices as listed in the donation store</p>
+      <ul class="checklist">
+        <li class="item" id="item-goats" data-unit="100" data-default="10" data-max="30" data-name="goats for families">
+          <div class="item-row">
+            <span class="box" aria-hidden="true"></span>
+            <button type="button" class="item-name-btn" aria-expanded="false" aria-controls="detail-goats">
+              <span class="item-text">
+                <span class="item-name">goats for families</span>
+                <span class="item-unit">$100 each</span>
+              </span>
+              <span class="chev" aria-hidden="true">⌄</span>
+            </button>
+            <div class="stepper" role="group" aria-label="Basket quantity for goats for families">
+              <button type="button" class="step-btn" data-action="dec" aria-label="Decrease quantity, goats for families">−</button>
+              <span class="step-qty">10</span>
+              <button type="button" class="step-btn" data-action="inc" aria-label="Increase quantity, goats for families">+</button>
+            </div>
+            <span class="item-total">$1,000</span>
+          </div>
+          <p class="item-detail" id="detail-goats"><b class="detail-math">10 × $100 = $1,000.</b> Funded so far: $0.<br /><span class="st">Not funded yet</span></p>
+        </li>
+        <li class="item" id="item-supplies" data-unit="25" data-default="20" data-max="100" data-name="school supply kits">
+          <div class="item-row">
+            <span class="box" aria-hidden="true"></span>
+            <button type="button" class="item-name-btn" aria-expanded="false" aria-controls="detail-supplies">
+              <span class="item-text">
+                <span class="item-name">school supply kits</span>
+                <span class="item-unit">$25 each</span>
+              </span>
+              <span class="chev" aria-hidden="true">⌄</span>
+            </button>
+            <div class="stepper" role="group" aria-label="Basket quantity for school supply kits">
+              <button type="button" class="step-btn" data-action="dec" aria-label="Decrease quantity, school supply kits">−</button>
+              <span class="step-qty">20</span>
+              <button type="button" class="step-btn" data-action="inc" aria-label="Increase quantity, school supply kits">+</button>
+            </div>
+            <span class="item-total">$500</span>
+          </div>
+          <p class="item-detail" id="detail-supplies"><b class="detail-math">20 × $25 = $500.</b> Funded so far: $0.<br /><span class="st">Not funded yet</span></p>
+        </li>
+        <li class="item" id="item-baby" data-unit="25" data-default="10" data-max="50" data-name="baby kits">
+          <div class="item-row">
+            <span class="box" aria-hidden="true"></span>
+            <button type="button" class="item-name-btn" aria-expanded="false" aria-controls="detail-baby">
+              <span class="item-text">
+                <span class="item-name">baby kits</span>
+                <span class="item-unit">$25 each</span>
+              </span>
+              <span class="chev" aria-hidden="true">⌄</span>
+            </button>
+            <div class="stepper" role="group" aria-label="Basket quantity for baby kits">
+              <button type="button" class="step-btn" data-action="dec" aria-label="Decrease quantity, baby kits">−</button>
+              <span class="step-qty">10</span>
+              <button type="button" class="step-btn" data-action="inc" aria-label="Increase quantity, baby kits">+</button>
+            </div>
+            <span class="item-total">$250</span>
+          </div>
+          <p class="item-detail" id="detail-baby"><b class="detail-math">10 × $25 = $250.</b> Funded so far: $0.<br /><span class="st">Not funded yet</span></p>
+        </li>
+        <li class="item" id="item-seeds" data-unit="500" data-default="1" data-max="10" data-name="Seeds for a village garden">
+          <div class="item-row">
+            <span class="box" aria-hidden="true"></span>
+            <button type="button" class="item-name-btn" aria-expanded="false" aria-controls="detail-seeds">
+              <span class="item-text">
+                <span class="item-name">Seeds for a village garden</span>
+                <span class="item-unit">$500 each</span>
+              </span>
+              <span class="chev" aria-hidden="true">⌄</span>
+            </button>
+            <div class="stepper" role="group" aria-label="Basket quantity for seeds for a village garden">
+              <button type="button" class="step-btn" data-action="dec" aria-label="Decrease quantity, seeds for a village garden">−</button>
+              <span class="step-qty">1</span>
+              <button type="button" class="step-btn" data-action="inc" aria-label="Increase quantity, seeds for a village garden">+</button>
+            </div>
+            <span class="item-total">$500</span>
+          </div>
+          <p class="item-detail" id="detail-seeds"><b class="detail-math">1 × $500 = $500.</b> Funded so far: $0.<br /><span class="st">Not funded yet</span></p>
+        </li>
+        <li class="item" id="item-eye" data-unit="500" data-default="1" data-max="10" data-name="corneal transplant surgery">
+          <div class="item-row">
+            <span class="box" aria-hidden="true"></span>
+            <button type="button" class="item-name-btn" aria-expanded="false" aria-controls="detail-eye">
+              <span class="item-text">
+                <span class="item-name">corneal transplant surgery</span>
+                <span class="item-unit">$500 each</span>
+              </span>
+              <span class="chev" aria-hidden="true">⌄</span>
+            </button>
+            <div class="stepper" role="group" aria-label="Basket quantity for corneal transplant surgery">
+              <button type="button" class="step-btn" data-action="dec" aria-label="Decrease quantity, corneal transplant surgery">−</button>
+              <span class="step-qty">1</span>
+              <button type="button" class="step-btn" data-action="inc" aria-label="Increase quantity, corneal transplant surgery">+</button>
+            </div>
+            <span class="item-total">$500</span>
+          </div>
+          <p class="item-detail" id="detail-eye"><b class="detail-math">1 × $500 = $500.</b> Funded so far: $0.<br /><span class="st">Not funded yet</span></p>
+        </li>
+        <li class="item" id="item-hygiene" data-unit="25" data-default="10" data-max="50" data-name="feminine hygiene kits">
+          <div class="item-row">
+            <span class="box" aria-hidden="true"></span>
+            <button type="button" class="item-name-btn" aria-expanded="false" aria-controls="detail-hygiene">
+              <span class="item-text">
+                <span class="item-name">feminine hygiene kits</span>
+                <span class="item-unit">$25 each</span>
+              </span>
+              <span class="chev" aria-hidden="true">⌄</span>
+            </button>
+            <div class="stepper" role="group" aria-label="Basket quantity for feminine hygiene kits">
+              <button type="button" class="step-btn" data-action="dec" aria-label="Decrease quantity, feminine hygiene kits">−</button>
+              <span class="step-qty">10</span>
+              <button type="button" class="step-btn" data-action="inc" aria-label="Increase quantity, feminine hygiene kits">+</button>
+            </div>
+            <span class="item-total">$250</span>
+          </div>
+          <p class="item-detail" id="detail-hygiene"><b class="detail-math">10 × $25 = $250.</b> Funded so far: $0.<br /><span class="st">Not funded yet</span></p>
+        </li>
+      </ul>
+
+      <div class="totals">
+        <div class="total-row">
+          <span class="k">Basket total — planning only</span>
+          <span class="v basket-total-value">$3,000</span>
+        </div>
+        <div class="total-row">
+          <span class="k">Funded total — actual</span>
+          <span class="v">$0 <small>of $3,000</small></span>
+        </div>
+      </div>
+
+      <p class="note"><b>Nothing funded yet.</b> Items tick off only when funded and delivery is confirmed.</p>
+      <p class="independence"><b>The Mali Wellness Foundation is an independent nonprofit, and SDG is an independent supporter.</b> No partnership is claimed. Prices above are from the foundation's donation store.</p>
+
+      <div class="ext-links">
+        <a class="ext" href="https://donations.maliwellnessfoundation.org/collections/all" target="_blank" rel="noopener noreferrer">
+          <span>Donation store<small>See the items, priced as listed</small></span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="ext" href="https://maliwellnessfoundation.org/" target="_blank" rel="noopener noreferrer">
+          <span>Mali Wellness Foundation<small>maliwellnessfoundation.org</small></span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<div class="tricolor" aria-hidden="true"></div>
+<footer>
+  <div class="wrap">
+    <p class="foot-line rv">Numbers move only when <em>something real</em> happens.</p>
+    <div class="foot-meta rv d1">
+      <p><b>Sahel Development Group</b> — improving infrastructure across the Sahel in architecture, technology, and finance. Its products are Sabaq and BaccPrep. Giving prices verified from the <a href="https://donations.maliwellnessfoundation.org/collections/all" target="_blank" rel="noopener noreferrer">Mali Wellness Foundation donation store</a>.</p>
+      <p class="foot-date">Sahel Development Group — 2027</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  function fmt(n){ return '$' + n.toLocaleString('en-US'); }
+
+  /* ---- Bismillah entrance: plays once on first entry, tap anywhere to skip ---- */
+  var intro = document.getElementById('intro');
+  if (intro) {
+    var introDone = false;
+    function endIntro(){
+      if (introDone) return;
+      introDone = true;
+      document.documentElement.classList.remove('intro-on');
+      if (intro.parentNode) intro.parentNode.removeChild(intro);
+      window.removeEventListener('pointerdown', endIntro, true);
+      window.removeEventListener('keydown', endIntro, true);
+    }
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) {
+      endIntro();
+    } else {
+      window.addEventListener('pointerdown', endIntro, true);
+      window.addEventListener('keydown', endIntro, true);
+      /* Split the Bismillah into letters (base letter + its marks stay one
+         cluster), scatter each to a different spot on screen, color them in
+         turn green / gold / red, then let them glide into place and arrange
+         themselves into the phrase. Falls back to the plain phrase if the
+         split cannot be built. */
+      var assembled = false;
+      try { assembled = splitIntroLetters(); } catch (e) { assembled = false; }
+      if (assembled) {
+        requestAnimationFrame(function(){
+          requestAnimationFrame(function(){ intro.classList.add('go'); });
+        });
+        /* Last letter settles at ~1.45s; quick fade out right after */
+        setTimeout(function(){
+          intro.classList.add('done');
+          setTimeout(endIntro, 320);
+        }, 1520);
+      } else {
+        setTimeout(function(){
+          intro.classList.add('done');
+          setTimeout(endIntro, 320);
+        }, 640);
+      }
+    }
+
+    function splitIntroLetters(){
+      var ar = intro.querySelector('.intro-ar');
+      if (!ar) return false;
+      var chars = Array.from(ar.textContent);
+      /* Grapheme clusters: a new cluster at each base letter; combining
+         marks (harakat, shadda, superscript alef) join the cluster before. */
+      var clusters = [];
+      for (var i = 0; i < chars.length; i++) {
+        var ch = chars[i];
+        var cp = ch.codePointAt(0);
+        var isMark = (cp >= 0x064B && cp <= 0x065F) || cp === 0x0670 || (cp >= 0x06D6 && cp <= 0x06ED);
+        if (ch === ' ') {
+          clusters.push({ text: ' ', space: true });
+        } else if (isMark && clusters.length && !clusters[clusters.length - 1].space) {
+          clusters[clusters.length - 1].text += ch;
+        } else {
+          clusters.push({ text: ch, space: false, base: ch });
+        }
+      }
+      /* Letters that never join to the letter after them — no joiner across
+         those seams, so the assembled phrase keeps its true letterforms. */
+      var nonJoin = {'ا':1,'أ':1,'إ':1,'آ':1,'ٱ':1,'د':1,'ذ':1,'ر':1,'ز':1,'ژ':1,'و':1,'ؤ':1,'ة':1,'ى':1,'ء':1};
+      function rnd(n){ var x = Math.sin(n * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); }
+      var frag = document.createDocumentFragment();
+      var letterIdx = 0;
+      clusters.forEach(function(cl, idx){
+        if (cl.space) { frag.appendChild(document.createTextNode(' ')); return; }
+        var prev = clusters[idx - 1];
+        var next = clusters[idx + 1];
+        var s = '';
+        if (prev && !prev.space && !nonJoin[prev.base]) s += '\u200D';
+        s += cl.text;
+        if (next && !next.space && !nonJoin[cl.base]) s += '\u200D';
+        var span = document.createElement('span');
+        span.className = 'lt c' + (letterIdx % 3);
+        span.textContent = s;
+        /* A different origin for every letter: own angle, own distance */
+        var ang = rnd(letterIdx * 3 + 1) * Math.PI * 2;
+        var dist = 0.28 + rnd(letterIdx * 3 + 2) * 0.5;
+        var dx = Math.cos(ang) * dist * window.innerWidth;
+        var dy = Math.sin(ang) * dist * window.innerHeight;
+        span.style.setProperty('--dx', dx.toFixed(0) + 'px');
+        span.style.setProperty('--dy', dy.toFixed(0) + 'px');
+        span.style.setProperty('--rot', ((rnd(letterIdx * 3 + 3) - 0.5) * 56).toFixed(1) + 'deg');
+        span.style.setProperty('--delay', (letterIdx * 34) + 'ms');
+        span.style.setProperty('--dur', (720 + rnd(letterIdx * 7 + 5) * 140).toFixed(0) + 'ms');
+        frag.appendChild(span);
+        letterIdx++;
+      });
+      if (!letterIdx) return false;
+      ar.textContent = '';
+      ar.appendChild(frag);
+      return true;
+    }
+  }
+
+  /* ---- Hash router: one page visible at a time ---- */
+  var pages = document.querySelectorAll('[data-page]');
+  var routeLinks = document.querySelectorAll('[data-route-link]');
+  var titles = {
+    home: 'Sahel Development Group',
+    sabaq: 'Sabaq — Sahel Development Group',
+    baccprep: 'BaccPrep — Sahel Development Group',
+    giving: 'Giving 2027 — Sahel Development Group'
+  };
+  var currentPage = null;
+
+  function pageFromHash(){
+    var h = (location.hash || '').replace(/^#\/?/, '').split('/')[0].split('?')[0];
+    if (!h) return 'home';
+    for (var i = 0; i < pages.length; i++) {
+      if (pages[i].getAttribute('data-page') === h) return h;
+    }
+    return 'home';
+  }
+
+  function showPage(name, animate){
+    pages.forEach(function(p){
+      var active = p.getAttribute('data-page') === name;
+      p.hidden = !active;
+      if (active && animate) {
+        p.classList.remove('page-enter');
+        void p.offsetWidth;
+        p.classList.add('page-enter');
+      }
+    });
+    routeLinks.forEach(function(a){
+      if (a.getAttribute('data-route-link') === name) {
+        a.setAttribute('aria-current', 'page');
+      } else {
+        a.removeAttribute('aria-current');
+      }
+    });
+    document.title = titles[name] || titles.home;
+    currentPage = name;
+  }
+
+  showPage(pageFromHash(), false);
+  window.addEventListener('hashchange', function(){
+    var next = pageFromHash();
+    if (next !== currentPage) {
+      showPage(next, true);
+      window.scrollTo(0, 0);
+    }
+  });
+
+  /* ---- Scroll reveal ---- */
+  var revealEls = document.querySelectorAll('.rv');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  /* ---- Arms accordion ---- */
+  var arms = document.querySelectorAll('.arm');
+  arms.forEach(function(arm){
+    var btn = arm.querySelector('.arm-btn');
+    btn.addEventListener('click', function(){
+      var isOpen = arm.classList.contains('open');
+      arms.forEach(function(other){
+        other.classList.remove('open');
+        other.querySelector('.arm-btn').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        arm.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  /* ---- Expandable giving-item details ---- */
+  var items = document.querySelectorAll('.item');
+  items.forEach(function(item){
+    var btn = item.querySelector('.item-name-btn');
+    btn.addEventListener('click', function(){
+      var open = item.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  });
+
+  /* ---- Giving basket builder: planning tool only ---- */
+  var GOAL = 3000;
+  var basketFill = document.getElementById('basketFill');
+  var basketMeter = document.getElementById('basketMeter');
+  var basketPct = document.getElementById('basketPct');
+  var basketTotals = document.querySelectorAll('.basket-total-value');
+
+  function renderBasket(){
+    var total = 0;
+    items.forEach(function(item){
+      var unit = parseInt(item.getAttribute('data-unit'), 10);
+      var max = parseInt(item.getAttribute('data-max'), 10);
+      var qty = parseInt(item.getAttribute('data-qty'), 10);
+      var line = qty * unit;
+      total += line;
+      item.querySelector('.step-qty').textContent = qty;
+      item.querySelector('.item-total').textContent = fmt(line);
+      item.querySelector('.detail-math').textContent = qty + ' × ' + fmt(unit) + ' = ' + fmt(line) + '.';
+      var dec = item.querySelector('[data-action="dec"]');
+      var inc = item.querySelector('[data-action="inc"]');
+      dec.disabled = qty <= 0;
+      inc.disabled = qty >= max;
+    });
+    basketTotals.forEach(function(el){ el.textContent = fmt(total); });
+    var pct = Math.round(total / GOAL * 100);
+    basketPct.textContent = pct + '%';
+    basketFill.style.width = Math.min(100, pct) + '%';
+    basketMeter.setAttribute('aria-valuenow', String(total));
+  }
+
+  items.forEach(function(item){
+    var def = parseInt(item.getAttribute('data-default'), 10);
+    item.setAttribute('data-qty', String(def));
+    item.querySelectorAll('.step-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var qty = parseInt(item.getAttribute('data-qty'), 10);
+        var max = parseInt(item.getAttribute('data-max'), 10);
+        if (btn.getAttribute('data-action') === 'inc') { qty = Math.min(max, qty + 1); }
+        else { qty = Math.max(0, qty - 1); }
+        item.setAttribute('data-qty', String(qty));
+        renderBasket();
+      });
+    });
+  });
+
+  document.getElementById('basketReset').addEventListener('click', function(){
+    items.forEach(function(item){
+      item.setAttribute('data-qty', item.getAttribute('data-default'));
+    });
+    renderBasket();
+  });
+
+  renderBasket();
+
+  /* ---- BaccPrep projection slider: projection only ---- */
+  var slider = document.getElementById('projSlider');
+  var projUsers = document.getElementById('projUsers');
+  var projTotal = document.getElementById('projTotal');
+  var projPct = document.getElementById('projPct');
+  function renderProjection(){
+    var users = parseInt(slider.value, 10);
+    var total = users * 300;
+    var pct = Math.round(users / 300 * 100);
+    projUsers.textContent = users.toLocaleString('en-US');
+    projTotal.textContent = fmt(total);
+    projPct.textContent = pct + '% of the 300-user target.';
+    slider.setAttribute('aria-valuetext', users + ' users, projected total ' + fmt(total));
+  }
+  slider.addEventListener('input', renderProjection);
+  renderProjection();
+
+  /* ---- Sabaq projection slider: projection only ---- */
+  var sSlider = document.getElementById('sabaqProjSlider');
+  var sProjUsers = document.getElementById('sabaqProjUsers');
+  var sProjTotal = document.getElementById('sabaqProjTotal');
+  var sProjPct = document.getElementById('sabaqProjPct');
+  function renderSabaqProjection(){
+    var users = parseInt(sSlider.value, 10);
+    var total = users * 60;
+    var pct = Math.round(users / 300 * 100);
+    sProjUsers.textContent = users.toLocaleString('en-US');
+    sProjTotal.textContent = fmt(total);
+    sProjPct.textContent = pct + '% of the 300-user target.';
+    sSlider.setAttribute('aria-valuetext', users + ' users, projected monthly total ' + fmt(total));
+  }
+  sSlider.addEventListener('input', renderSabaqProjection);
+  renderSabaqProjection();
+})();
+</script>
+</body>
+</html>
