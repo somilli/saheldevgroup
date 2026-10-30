@@ -107,7 +107,7 @@
   .sec-title em.em-red, .page-title em.em-red, .goal-title em.em-red{color:var(--mali-red-hi)}
 
   /* ---------- Display type — Bricolage sets every headline, name, and big number ---------- */
-  .hero-title, .sec-title, .page-title, .goal-title,
+  .sec-title, .page-title, .goal-title,
   .hero-mission, .pillar .p-name, .prod-card-name,
   .arm-name, .glance-t, .glance-num,
   .mission-lede, .mission-cell .m-v, .feature .f-name,
@@ -222,27 +222,30 @@
     font-size:12px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--muted);
     animation:fadeUp .8s .1s cubic-bezier(.22,.61,.21,1) both;
   }
-  .hero-title{
-    margin:clamp(14px, 3vh, 28px) 0 0;
-    font-family:var(--font-wordmark);
-    font-size:clamp(40px, 10.4vw, 120px);
-    line-height:1.06; letter-spacing:-.01em; font-weight:700;
-    text-transform:uppercase;
+  /* Hero lead: tagline on the left, map of the Sahel on the right */
+  .hero-top{
+    display:grid; grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);
+    gap:clamp(28px, 5vw, 72px); align-items:center;
+    margin-top:clamp(22px, 4vh, 40px);
   }
-  .hero-title .line{display:block; overflow:hidden}
-  .hero-title .line > span{
-    display:block;
-    padding:.08em .1em .14em 0;
-    animation:lineUp 1s cubic-bezier(.19,.7,.22,1) both;
+  .hero-tagline{
+    margin:0;
+    font-family:var(--font-display);
+    font-size:clamp(36px, 5.4vw, 66px);
+    line-height:1.12; letter-spacing:-.015em; font-weight:500;
+    color:var(--ink);
+    text-shadow:0 3px 34px rgba(0,0,0,.5);
+    animation:fadeUp .9s .22s cubic-bezier(.22,.61,.21,1) both;
   }
-  .hero-title .line:nth-child(1) > span{animation-delay:.15s}
-  .hero-title .line:nth-child(2) > span{animation-delay:.28s}
-  .hero-title .line:nth-child(3) > span{animation-delay:.41s}
-  .hero-title .w-green{color:var(--mali-green-hi)}
-  .hero-title .w-red{color:var(--mali-red-hi)}
-  .hero-title .w-gold{color:var(--mali-gold-hi)}
-  .hero-title .line > span{text-shadow:0 3px 34px rgba(0,0,0,.5)}
-  @keyframes lineUp{from{transform:translateY(110%)} to{transform:none}}
+  .hero-map{margin:0; animation:fadeUp .9s .4s cubic-bezier(.22,.61,.21,1) both}
+  .hero-map svg{display:block; width:100%; max-width:440px; height:auto; margin-left:auto}
+  .map-land{fill:rgba(30,158,114,.08); stroke:rgba(30,158,114,.6); stroke-width:1.5; stroke-linejoin:round}
+  .map-band{fill:rgba(217,154,6,.30)}
+  .map-mali{fill:var(--mali-gold); opacity:.92}
+  .map-dot{fill:var(--bg); stroke:var(--mali-gold-hi); stroke-width:1.6}
+  .map-label{font-family:var(--font-ui); font-weight:700; letter-spacing:.22em}
+  .map-label-mali{fill:var(--mali-gold-ink); font-size:11px}
+  .map-label-sahel{fill:var(--mali-gold-hi); font-size:11px}
   @keyframes fadeUp{from{opacity:0; transform:translateY(18px)} to{opacity:1; transform:none}}
   .hero-mission{
     margin:clamp(26px, 5vh, 44px) 0 0; max-width:860px;
@@ -653,6 +656,8 @@
     .topnav{order:3; width:100%; justify-content:space-between; gap:2px; border-top:1px solid var(--line)}
     .topnav a{flex:1; justify-content:center; padding:6px 4px; letter-spacing:.1em}
     .wordmark span{display:none}
+    .hero-top{grid-template-columns:1fr}
+    .hero-map svg{margin:0 auto; max-width:400px}
     .pillars{grid-template-columns:1fr}
     .pillar{border-left:0; border-top:1px solid var(--line); padding:18px 0 20px}
     .pillar:first-child{border-top:0}
@@ -721,13 +726,36 @@
       <span>Sahel Development Group</span>
       <span>Columbus, Ohio — building for the Sahel</span>
     </div>
-    <h1 class="hero-title" aria-label="Sahel Development Group">
-      <span class="line"><span class="w-green">Sahel</span></span>
-      <span class="line"><span class="w-red">Development</span></span>
-      <span class="line"><span class="w-gold">Group</span></span>
-    </h1>
-    <p class="hero-mission">Improving infrastructure across the Sahel — <em>architecture, technology, and finance.</em></p>
-    <p class="hero-sub">One company, three pillars. Built by the diaspora, with people on the ground, for Mali and the wider Sahel.</p>
+    <div class="hero-top">
+      <div class="hero-lead">
+        <h1 class="hero-tagline">Building the future of the Sahel</h1>
+        <p class="hero-mission">Improving infrastructure across the Sahel — <em>architecture, technology, and finance.</em></p>
+        <p class="hero-sub">One company, three pillars. Built by the diaspora, with people on the ground, for Mali and the wider Sahel.</p>
+      </div>
+      <figure class="hero-map">
+        <svg viewBox="0 0 420 440" role="img" aria-label="Map of Africa with the Sahel band highlighted across West and Central Africa, and Mali highlighted in the middle of the band">
+          <defs>
+            <clipPath id="mapAfricaClip">
+              <path d="M72,22 L100,16 L132,15 L146,13 L150,26 L154,37 L172,40 L196,40 L224,46 L234,45 L242,64 L250,84 L255,106 L265,127 L280,148 L316,147 L310,164 L306,182 L290,198 L278,214 L266,229 L264,243 L269,264 L269,286 L258,300 L250,312 L244,328 L235,343 L229,363 L218,378 L211,385 L190,388 L174,384 L168,368 L166,356 L160,338 L158,325 L154,300 L152,275 L152,254 L148,239 L140,222 L136,206 L132,185 L121,185 L110,174 L100,175 L94,179 L84,181 L78,180 L68,177 L63,175 L50,168 L39,164 L36,159 L29,147 L20,132 L24,124 L25,104 L27,83 L32,64 L46,54 L54,46 L63,33 Z" />
+            </clipPath>
+            <clipPath id="mapBandClip">
+              <path d="M14,128 L61,116 L95,121 L138,126 L181,129 L224,126 L262,120 L268,132 L262,146 L224,153 L181,151 L138,153 L95,153 L61,150 L36,152 L16,142 Z" />
+            </clipPath>
+          </defs>
+          <path class="map-land" d="M72,22 L100,16 L132,15 L146,13 L150,26 L154,37 L172,40 L196,40 L224,46 L234,45 L242,64 L250,84 L255,106 L265,127 L280,148 L316,147 L310,164 L306,182 L290,198 L278,214 L266,229 L264,243 L269,264 L269,286 L258,300 L250,312 L244,328 L235,343 L229,363 L218,378 L211,385 L190,388 L174,384 L168,368 L166,356 L160,338 L158,325 L154,300 L152,275 L152,254 L148,239 L140,222 L136,206 L132,185 L121,185 L110,174 L100,175 L94,179 L84,181 L78,180 L68,177 L63,175 L50,168 L39,164 L36,159 L29,147 L20,132 L24,124 L25,104 L27,83 L32,64 L46,54 L54,46 L63,33 Z" />
+          <path class="map-land" d="M306,272 L312,292 L304,317 L297,335 L290,341 L281,323 L284,296 L287,276 Z" />
+          <g clip-path="url(#mapAfricaClip)">
+            <path class="map-band" d="M14,128 L61,116 L95,121 L138,126 L181,129 L224,126 L262,120 L268,132 L262,146 L224,153 L181,151 L138,153 L95,153 L61,150 L36,152 L16,142 Z" />
+            <g clip-path="url(#mapBandClip)">
+              <path class="map-mali" d="M61,136 L64,121 L82,118 L100,121 L112,130 L110,145 L96,152 L78,153 L62,147 Z" />
+            </g>
+          </g>
+          <circle class="map-dot" cx="63" cy="143" r="3.2" />
+          <text class="map-label map-label-mali" x="88" y="140" text-anchor="middle">MALI</text>
+          <text class="map-label map-label-sahel" x="203" y="144" text-anchor="middle">THE SAHEL</text>
+        </svg>
+      </figure>
+    </div>
 
     <div class="pillars">
       <div class="pillar">
