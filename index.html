@@ -9,7 +9,7 @@
 <title>Sahel Development Group</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Alkalami&family=Amiri:wght@400;700&family=Archivo:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Harmattan:wght@400;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Alkalami&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Instrument+Serif:ital@0;1&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
   :root{
     --bg:#060606;
@@ -38,7 +38,10 @@
     --mali-red-hi:#cc382a;
     /* Sudani manuscript ink — warm brown of the Timbuktu hand, lifted only enough to read on near-black */
     --ink:#cd8f4d;
-    --font-ar:"Alkalami","Harmattan","Amiri",serif;
+    --font-ar:"Alkalami",serif;
+    --font-display:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif;
+    --font-ui:"Sora",system-ui,-apple-system,"Segoe UI",sans-serif;
+    --font-accent:"Instrument Serif",Georgia,serif;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
@@ -46,9 +49,9 @@
     margin:0;
     background:var(--bg);
     color:var(--text);
-    font-family:"Archivo",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    font-family:var(--font-ui);
     font-size:16px;
-    line-height:1.5;
+    line-height:1.55;
     -webkit-font-smoothing:antialiased;
   }
   a{color:inherit}
@@ -85,6 +88,7 @@
   .btn-ghost{background:transparent; color:var(--white)}
   .btn-ghost:hover{background:var(--white); color:var(--black)}
   .btn:active{transform:translateY(1px)}
+
   .btn .btn-arrow{font-size:15px; line-height:1; transition:transform .2s ease}
   .btn:hover .btn-arrow{transform:translate(2px,-2px)}
   .chip{
@@ -100,6 +104,18 @@
   .hero-mission em, .sec-title em, .page-title em, .goal-title em, .foot-line em{color:var(--emerald)}
   .sec-title em.em-gold, .page-title em.em-gold, .goal-title em.em-gold{color:var(--mali-gold-hi)}
   .sec-title em.em-red, .page-title em.em-red, .goal-title em.em-red{color:var(--mali-red-hi)}
+
+  /* ---------- Display type — Bricolage sets every headline, name, and big number ---------- */
+  .hero-title, .sec-title, .page-title, .goal-title,
+  .hero-mission, .pillar .p-name, .prod-card-name,
+  .arm-name, .glance-t, .glance-num,
+  .mission-lede, .mission-cell .m-v, .feature .f-name,
+  .page-lede, .h-counter .hc-num, .plan-price, .stat-cell .sv,
+  .big-num, .price-row .v, .proj-output p, .basket-total-value,
+  .item-total, .total-row .v, .update-body h3, .ext,
+  .planner-head h4, .foot-line{
+    font-family:var(--font-display);
+  }
 
   /* Mali tricolor stripe — green, gold, red */
   .tricolor{height:4px; background:linear-gradient(90deg, var(--mali-green) 0 33.4%, var(--mali-gold) 33.4% 66.7%, var(--mali-red) 66.7% 100%)}
@@ -144,12 +160,6 @@
   .intro-ar .lt.c0{color:var(--mali-green-hi)}
   .intro-ar .lt.c1{color:var(--mali-gold-hi)}
   .intro-ar .lt.c2{color:var(--mali-red-hi)}
-  .intro-tr{
-    margin:10px 0 0;
-    font-size:11px; font-weight:600; letter-spacing:.3em; text-transform:uppercase;
-    color:var(--muted);
-  }
-
   /* ---------- Top bar ---------- */
   .topbar{
     position:sticky; top:0; z-index:40;
@@ -171,11 +181,6 @@
     font-size:22px; line-height:1.8;
     color:var(--ink);
   }
-  .bismillah .tr{
-    display:block; margin-top:1px;
-    font-size:10px; font-weight:600; letter-spacing:.26em; text-transform:uppercase;
-    color:var(--muted);
-  }
   .topbar-inner{
     max-width:1180px; margin:0 auto; padding:0 20px;
     display:flex; align-items:center; justify-content:space-between; gap:8px 16px;
@@ -183,7 +188,8 @@
   }
   .wordmark{
     display:inline-flex; align-items:center; min-height:44px;
-    font-size:13px; font-weight:700; letter-spacing:.22em; text-transform:uppercase;
+    font-family:var(--font-display);
+    font-size:15px; font-weight:800; letter-spacing:.24em; text-transform:uppercase;
     text-decoration:none; white-space:nowrap;
   }
   .wordmark span{color:var(--muted); font-weight:500}
@@ -241,7 +247,7 @@
     font-size:clamp(24px, 4.2vw, 40px); line-height:1.25; font-weight:500; letter-spacing:-.015em;
     animation:fadeUp .9s .55s cubic-bezier(.22,.61,.21,1) both;
   }
-  .hero-mission em{font-family:"Cormorant Garamond",Georgia,serif; font-style:italic; font-weight:500; font-size:1.12em}
+  .hero-mission em{font-family:var(--font-accent); font-style:italic; font-weight:400; font-size:1.14em}
   .hero-sub{
     margin:18px 0 0; max-width:560px; color:var(--muted); font-size:16px; line-height:1.6;
     animation:fadeUp .9s .68s cubic-bezier(.22,.61,.21,1) both;
@@ -308,7 +314,7 @@
     margin:14px 0 0;
     font-size:clamp(34px, 6vw, 56px); line-height:1.02; font-weight:600; letter-spacing:-.025em;
   }
-  .sec-title em{font-family:"Cormorant Garamond",Georgia,serif; font-style:italic; font-weight:500}
+  .sec-title em{font-family:var(--font-accent); font-style:italic; font-weight:400; font-size:1.04em}
   .sec-note{margin:0; font-size:13px; color:var(--muted); max-width:340px; line-height:1.6}
 
   /* Mission */
@@ -434,7 +440,7 @@
     margin:18px 0 0;
     font-size:clamp(56px, 12vw, 120px); line-height:.92; font-weight:700; letter-spacing:-.04em;
   }
-  .page-title em{font-family:"Cormorant Garamond",Georgia,serif; font-style:italic; font-weight:500; letter-spacing:-.01em}
+  .page-title em{font-family:var(--font-accent); font-style:italic; font-weight:400; font-size:1.06em; letter-spacing:-.01em}
   .page-lede{
     margin:22px 0 0; max-width:720px;
     font-size:clamp(20px, 3.2vw, 28px); line-height:1.4; font-weight:500; letter-spacing:-.01em;
@@ -468,6 +474,9 @@
     font-size:clamp(52px, 10vw, 84px); line-height:.95; font-weight:700; letter-spacing:-.035em; font-variant-numeric:tabular-nums;
   }
   .plan-price small{font-size:.32em; font-weight:500; color:rgba(255,255,255,.62); letter-spacing:0}
+  /* Display serif for the plan amount itself, kept at the panel's own size */
+  .plan-price{font-family:var(--font-accent); font-weight:400; letter-spacing:-.01em}
+  .plan-price small{font-family:var(--font-ui); font-style:normal}
   .plan-desc{margin:16px 0 0; max-width:620px; font-size:17px; line-height:1.6; color:#ddefe3}
   .plan-desc b{color:var(--white); font-weight:600}
   .plan .btn{margin-top:28px}
@@ -494,7 +503,7 @@
   .goal-label{margin:0; font-size:12px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:var(--faint)}
   .goal-status{font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--muted)}
   .goal-title{margin:12px 0 0; font-size:clamp(30px, 5.4vw, 46px); line-height:1.05; font-weight:600; letter-spacing:-.02em}
-  .goal-title em{font-family:"Cormorant Garamond",Georgia,serif; font-style:italic; font-weight:500}
+  .goal-title em{font-family:var(--font-accent); font-style:italic; font-weight:400; font-size:1.05em}
   .big-row{display:flex; align-items:baseline; flex-wrap:wrap; gap:6px 16px; margin:22px 0 0}
   .big-row p{margin:0}
   .big-num{font-size:clamp(64px, 13vw, 96px); line-height:.9; font-weight:600; letter-spacing:-.04em; font-variant-numeric:tabular-nums}
@@ -628,7 +637,7 @@
     margin:0;
     font-size:clamp(30px, 6vw, 54px); line-height:1.1; font-weight:600; letter-spacing:-.025em; max-width:820px;
   }
-  .foot-line em{font-family:"Cormorant Garamond",Georgia,serif; font-style:italic; font-weight:500}
+  .foot-line em{font-family:var(--font-accent); font-style:italic; font-weight:400; font-size:1.05em}
   .foot-meta{
     display:flex; justify-content:space-between; gap:12px 32px; flex-wrap:wrap;
     margin-top:40px; padding-top:20px; border-top:1px solid var(--line);
@@ -683,14 +692,12 @@
 <div class="intro" id="intro" aria-hidden="true">
   <div class="intro-inner">
     <p class="intro-ar" lang="ar" dir="rtl">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
-    <p class="intro-tr">Bismillahirrahmanirrahim</p>
   </div>
 </div>
 
 <header class="topbar">
   <div class="bismillah">
     <span class="ar" lang="ar" dir="rtl">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</span>
-    <span class="tr">Bismillahirrahmanirrahim</span>
   </div>
   <div class="topbar-inner">
     <a class="wordmark" href="#/" data-route-link="home">SDG <span>— Sahel Development Group</span></a>
