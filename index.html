@@ -335,23 +335,6 @@
   .mission-cell .m-k{font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--faint)}
   .mission-cell .m-v{display:block; margin-top:10px; font-size:19px; font-weight:600; line-height:1.3; letter-spacing:-.01em}
   .mission-cell p{margin:8px 0 0; font-size:14px; color:var(--muted); line-height:1.6}
-  /* The name, defined — dictionary entries for the three words of the name */
-  .defs{margin:40px 0 0; border-top:1px solid var(--white)}
-  .def{
-    display:grid; grid-template-columns:minmax(0,250px) minmax(0,1fr); gap:4px 36px; align-items:baseline;
-    padding:24px 8px; border-bottom:1px solid var(--line);
-  }
-  .def dt{margin:0}
-  .def-word{
-    font-family:var(--font-wordmark);
-    font-size:clamp(26px, 4vw, 34px); font-weight:700; letter-spacing:.01em; text-transform:uppercase; line-height:1.1;
-  }
-  .def-sahel .def-word{color:var(--mali-green-hi)}
-  .def-development .def-word{color:var(--mali-red-hi)}
-  .def-group .def-word{color:var(--mali-gold-hi)}
-  .def-pos{font-family:var(--font-accent); font-style:italic; font-size:16px; color:var(--muted); margin-left:10px}
-  .def dd{margin:0; font-size:16px; line-height:1.65; color:var(--body); max-width:640px}
-  .def dd b{color:var(--white); font-weight:600}
   .mission-art{
     margin:40px 0 0; padding:clamp(24px, 5vw, 44px);
     background:#f4efe6; border:1px solid var(--line);
@@ -376,7 +359,6 @@
   .arm-btn:active{background:var(--panel-2)}
   .arm-num{font-size:13px; font-weight:600; letter-spacing:.14em; color:var(--faint); font-variant-numeric:tabular-nums}
   .arm-name{display:block; font-size:clamp(24px, 4.4vw, 36px); font-weight:600; letter-spacing:-.02em; line-height:1.1}
-  .arm-line{display:block; margin-top:4px; font-size:15px; color:var(--muted)}
   .arm-tag{
     font-size:11px; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
     border:1px solid var(--line); padding:6px 10px; color:var(--muted); white-space:nowrap;
@@ -678,7 +660,6 @@
     .h-counter{padding:16px 0 18px; border-left:0; border-bottom:1px solid var(--line)}
     .h-counter:last-child{border-bottom:0}
     .mission-grid{grid-template-columns:1fr}
-    .def{grid-template-columns:1fr; gap:8px; padding:20px 4px}
     .prod-cards{grid-template-columns:1fr}
     .prod-card .btn{align-self:stretch}
     .feature-grid{grid-template-columns:1fr}
@@ -795,23 +776,26 @@
         <p class="sec-label">Mission</p>
         <h2 class="sec-title">One group.<br />Built for <em>the Sahel.</em></h2>
       </div>
-      <p class="sec-note">Start with the name. Three words, defined plainly.</p>
+      <p class="sec-note">No slogans about changing the world. Just the work, stated plainly.</p>
     </div>
-    <p class="mission-lede rv d1">One company, three trades — <b>architecture, technology, and finance</b> — <span>the things a place needs before anything else can move.</span> It starts in Mali, then the wider Sahel.</p>
-    <dl class="defs rv d2">
-      <div class="def def-sahel">
-        <dt><span class="def-word">Sahel</span><span class="def-pos">noun</span></dt>
-        <dd>Arabic for “shore” — the band of land along the southern edge of the Sahara, across West Africa. <b>Mali sits in the middle of it</b>, and everything this group builds is aimed there.</dd>
+    <p class="mission-lede rv d1">Sahel Development Group is one company building across <b>architecture, technology, and finance</b> — <span>the three things a place needs before anything else can move.</span> We start where our own people are: Mali, then the wider Sahel.</p>
+    <div class="mission-grid rv d2">
+      <div class="mission-cell">
+        <span class="m-k">Based</span>
+        <span class="m-v">Columbus, Ohio</span>
+        <p>Run from the United States, where the capital, the customers, and the diaspora are.</p>
       </div>
-      <div class="def def-development">
-        <dt><span class="def-word">Development</span><span class="def-pos">noun</span></dt>
-        <dd>The work itself, not the promise of it: <b>a house drawn before it is built, money that reaches people the banks skip, Wi-Fi in a shop, land papers in the owner's hand.</b></dd>
+      <div class="mission-cell">
+        <span class="m-k">Building for</span>
+        <span class="m-v">Mali &amp; the wider Sahel</span>
+        <p>Products and services designed for the ground they will actually run on.</p>
       </div>
-      <div class="def def-group">
-        <dt><span class="def-word">Group</span><span class="def-pos">noun</span></dt>
-        <dd>One company — <b>not a charity, not a fund.</b> Four arms: Design, Pay, Connect, Certificates. Two products in the workshop: Sabaq and BaccPrep. Run from Columbus, Ohio, by the diaspora.</dd>
+      <div class="mission-cell">
+        <span class="m-k">How</span>
+        <span class="m-v">Diaspora-first</span>
+        <p>Built from abroad, with people on the ground. The diaspora pays, the Sahel benefits.</p>
       </div>
-    </dl>
+    </div>
   </div>
 </section>
 
@@ -822,7 +806,7 @@
         <p class="sec-label">What we do</p>
         <h2 class="sec-title">Four arms.<br />One <em class="em-gold">mission.</em></h2>
       </div>
-      <p class="sec-note">Tap any arm to open it. Four arms, each defined by the job it does — and who it does it for.</p>
+      <p class="sec-note">Tap any arm to open it. Each one is a working direction of the group — stated as it is, not dressed up.</p>
     </div>
 
     <div class="arms rv d1">
@@ -831,7 +815,6 @@
           <span class="arm-num">01</span>
           <span>
             <span class="arm-name">SDG Design</span>
-            <span class="arm-line">A building, drawn in 3D before it is built.</span>
           </span>
           <span class="arm-tag">Architecture</span>
           <span class="arm-mark" aria-hidden="true">+</span>
@@ -846,7 +829,6 @@
           <span class="arm-num">02</span>
           <span>
             <span class="arm-name">SDG Pay</span>
-            <span class="arm-line">Money that moves, even where banks don't.</span>
           </span>
           <span class="arm-tag">Finance</span>
           <span class="arm-mark" aria-hidden="true">+</span>
@@ -861,7 +843,6 @@
           <span class="arm-num">03</span>
           <span>
             <span class="arm-name">SDG Connect</span>
-            <span class="arm-line">Wi-Fi routers for local businesses.</span>
           </span>
           <span class="arm-tag">Technology</span>
           <span class="arm-mark" aria-hidden="true">+</span>
@@ -876,7 +857,6 @@
           <span class="arm-num">04</span>
           <span>
             <span class="arm-name">SDG Certificates</span>
-            <span class="arm-line">Land documents, without the runaround.</span>
           </span>
           <span class="arm-tag">Architecture</span>
           <span class="arm-mark" aria-hidden="true">+</span>
