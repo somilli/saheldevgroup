@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="color-scheme" content="dark" />
 <meta name="description" content="Sahel Development Group — improving infrastructure across the Sahel in architecture, technology, and finance. Its products are Sabaq, an AI Quran memorization coach, and BaccPrep, bac exam preparation for Mali. 2027 goals tracked in public: Sabaq and BaccPrep to 300 users each, and $3,000 of giving through the Mali Wellness Foundation. All counters start at zero." />
-<link rel="icon" href="data:," />
+<link rel="icon" type="image/png" href="assets/sdg-icon.png" />
 <title>Sahel Development Group</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -189,11 +189,12 @@
     min-height:56px;
   }
   .wordmark{
-    display:inline-flex; align-items:center; min-height:44px;
+    display:inline-flex; align-items:center; gap:11px; min-height:44px;
     font-family:var(--font-wordmark);
     font-size:15px; font-weight:700; letter-spacing:.2em; text-transform:uppercase;
     text-decoration:none; white-space:nowrap;
   }
+  .wordmark .brand-mark{display:block; width:27px; height:28px; flex:none}
   .wordmark span{color:var(--muted); font-weight:500}
   .wordmark:active{transform:translateY(1px)}
   .topnav{display:flex; gap:6px}
@@ -627,6 +628,7 @@
 
   /* Footer */
   footer{padding:clamp(48px, 8vw, 80px) 0 40px}
+  .foot-logo{display:block; width:min(300px, 72vw); height:auto; margin:0 0 clamp(30px, 5vw, 44px)}
   .foot-line{
     margin:0;
     font-size:clamp(30px, 6vw, 54px); line-height:1.1; font-weight:600; letter-spacing:-.025em; max-width:820px;
@@ -694,7 +696,7 @@
     <span class="ar" lang="ar" dir="rtl">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</span>
   </div>
   <div class="topbar-inner">
-    <a class="wordmark" href="#/" data-route-link="home">SDG <span>— Sahel Development Group</span></a>
+    <a class="wordmark" href="#/" data-route-link="home"><img class="brand-mark" src="assets/sdg-mark.png" alt="" width="440" height="450" />SDG <span>— Sahel Development Group</span></a>
     <nav class="topnav" aria-label="Pages">
       <a href="#/" data-route-link="home">Home</a>
       <a href="#/sabaq" data-route-link="sabaq">Sabaq</a>
@@ -767,26 +769,26 @@
     <div class="sec-head rv">
       <div>
         <p class="sec-label">Mission</p>
-        <h2 class="sec-title">One group.<br />Built for <em>the Sahel.</em></h2>
+        <h2 class="sec-title">Three things.<br />Done <em>properly.</em></h2>
       </div>
       <p class="sec-note">No slogans about changing the world. Just the work, stated plainly.</p>
     </div>
-    <p class="mission-lede rv d1">Sahel Development Group is one company building across <b>architecture, technology, and finance</b> — <span>the three things a place needs before anything else can move.</span> We start where our own people are: Mali, then the wider Sahel.</p>
+    <p class="mission-lede rv d1">Sahel Development Group does three things: <b>architecture, technology, and finance</b>. <span>One group, so a family building in Mali does not have to piece it together from strangers.</span> We start in Mali, then the wider Sahel.</p>
     <div class="mission-grid rv d2">
       <div class="mission-cell">
         <span class="m-k">Based</span>
         <span class="m-v">Columbus, Ohio</span>
-        <p>Run from the United States, where the capital, the customers, and the diaspora are.</p>
+        <p>Run from the United States.</p>
       </div>
       <div class="mission-cell">
         <span class="m-k">Building for</span>
         <span class="m-v">Mali &amp; the wider Sahel</span>
-        <p>Products and services designed for the ground they will actually run on.</p>
+        <p>Built for the ground it will run on — not imported as-is.</p>
       </div>
       <div class="mission-cell">
         <span class="m-k">How</span>
         <span class="m-v">Diaspora-first</span>
-        <p>Built from abroad, with people on the ground. The diaspora pays, the Sahel benefits.</p>
+        <p>Designed abroad, delivered with people on the ground.</p>
       </div>
     </div>
   </div>
@@ -1345,6 +1347,7 @@
 <div class="tricolor" aria-hidden="true"></div>
 <footer>
   <div class="wrap">
+    <img class="foot-logo rv" src="assets/sdg-logo.png" alt="Sahel Development Group logo — the Djenné mud-mosque mark above the letters SDG" width="819" height="740" />
     <p class="foot-line rv">Numbers move only when <em>something real</em> happens.</p>
     <div class="foot-meta rv d1">
       <p><b>Sahel Development Group</b> — improving infrastructure across the Sahel in architecture, technology, and finance. Its products are Sabaq and BaccPrep. Giving prices verified from the <a href="https://donations.maliwellnessfoundation.org/collections/all" target="_blank" rel="noopener noreferrer">Mali Wellness Foundation donation store</a>.</p>
